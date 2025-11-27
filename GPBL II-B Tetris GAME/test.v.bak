@@ -1,0 +1,3 @@
+module test(output reg hex0_a);
+
+endmodule

@@ -1,0 +1,1481 @@
+module last_tetris(
+	input clk,input left,input right,input reset,input sw9,input sw8,
+	output reg hex0_a,output reg hex0_b,output reg hex0_c,output reg hex0_d,output reg hex0_e,output reg hex0_f,output reg hex0_g,
+	output reg hex1_a,output reg hex1_b,output reg hex1_c,output reg hex1_d,output reg hex1_e,output reg hex1_f,output reg hex1_g,
+	output reg hex2_a,output reg hex2_b,output reg hex2_c,output reg hex2_d,output reg hex2_e,output reg hex2_f,output reg hex2_g,
+	output reg hex3_a,output reg hex3_b,output reg hex3_c,output reg hex3_d,output reg hex3_e,output reg hex3_f,output reg hex3_g,
+	output reg led6,output reg led7,output reg led8,output reg led9
+);
+parameter [25:0] level1=26'd50000000,level2=26'd37500000,level3=26'd25000000;
+reg [25:0]tmp=level1;
+reg again=0;
+reg buffer=0;
+reg down=0,toHex=0,endGame=0;
+reg [4:1]now=4'd00;
+reg [25:0]cnt; //璸计盚竟
+always @(posedge clk or negedge reset)begin
+	if(!reset) cnt = 26'd0; //確
+	else if(cnt == tmp) //耞璸计琌笷50M1s
+		cnt = 26'd0; //狦璸计笷50M1s璸计耴箂
+	else cnt = cnt + 1'b1;                    //璸计ぃ50M笆1
+end
+////////////////////////////////////////////////////////////////////////////////random
+reg[25:0]cnt2;
+reg [1:0]ran=2'd00;
+reg state_l=0;
+reg state_r=0;
+/////////////////////////////////////////////////////////////////////////////////
+always@(posedge clk)begin
+	cnt2=cnt2%13;
+	cnt2 = cnt2 + 1'b1;    
+	
+	if(!reset)begin //0=light 1=dark
+		 hex0_a=1; hex0_b=1; hex0_c=1; hex0_d=1; hex0_e=1; hex0_f=1; hex0_g=1; 
+		 hex1_a=1; hex1_b=1; hex1_c=1; hex1_d=1; hex1_e=1; hex1_f=1; hex1_g=1;
+		 hex2_a=1; hex2_b=1; hex2_c=1; hex2_d=1; hex2_e=1; hex2_f=1; hex2_g=1;
+		 hex3_a=1; hex3_b=1; hex3_c=1; hex3_d=1; hex3_e=1; hex3_f=1; hex3_g=1;
+		 led6<=0;led7<=0;led8<=0;led9<=0; cnt2 = 4'd0; 
+		 down=0;toHex=0;now=0;endGame=0;state_l=0;state_r=0;
+	end
+	
+	if(sw9) tmp=level2;
+	if(sw8)tmp=level3;
+	if(!sw9&&!sw8) tmp=level1;
+	
+	if(!right) state_r=1;
+		
+	if(!left) state_l=1;
+	
+	if(cnt == tmp)begin
+		if(!down)begin
+			led6<=1;
+			led7<=1;
+			led8<=1;
+			down=1;
+			ran=ran+1;
+		end
+		else begin
+			if(hex0_g==0) now=2;
+			if(led6==0 & toHex==0)begin
+				if(hex0_g!=0||(ran==0&&hex0_e!=0)||(ran==2&&hex0_c!=0)||(ran==1&&hex0_f!=0)||(ran==3&&hex0_b!=0)) begin
+					if(ran==0) hex0_e=0;
+					if(ran==1) hex0_f=0;
+					if(ran==2) hex0_c=0;
+					if(ran==3) hex0_b=0;
+					hex0_g=0; now=0;
+				end
+				else begin 
+					now=0;
+					down=0;
+					endGame=1;
+				end
+				toHex=1;
+			end
+			if(endGame==1)begin
+				hex0_a=0; hex0_b=1; hex0_c=1; hex0_d=0; hex0_e=0; hex0_f=0; hex0_g=0; 
+				hex1_a=0; hex1_b=1; hex1_c=0; hex1_d=0; hex1_e=1; hex1_f=0; hex1_g=0;
+				hex2_a=0; hex2_b=0; hex2_c=0; hex2_d=0; hex2_e=0; hex2_f=0; hex2_g=1;
+				hex3_a=1; hex3_b=1; hex3_c=1; hex3_d=0; hex3_e=0; hex3_f=0; hex3_g=1;
+			end
+			else begin
+		
+			if(state_r)begin///////////////////////////////////////////right
+				if(now==1&&ran==2'd00)begin  ////////////0
+					if(hex0_e==1&hex0_g==1)begin
+						now=2;
+						hex0_a=1;
+						hex0_f=1;
+						hex0_e=0;
+						hex0_g=0;
+					end
+				
+				end
+				else if(now==4&&ran==2'd00)begin
+					if(hex1_e==1&hex1_g==1)begin
+						now=5;
+						hex1_a=1;
+						hex1_f=1;
+						hex1_e=0;
+						hex1_g=0;
+					end
+				end
+				else if(now==7&&ran==2'd00)begin
+					if(hex2_e==1&hex2_g==1)begin
+						now=8;
+						hex2_a=1;
+						hex2_f=1;
+						hex2_e=0;
+						hex2_g=0;
+					end
+				end
+				else if(now==10&&ran==2'd00)begin
+					if(hex3_e==1&hex3_g==1)begin
+						now=11;
+						hex3_a=1;
+						hex3_f=1;
+						hex3_e=0;
+						hex3_g=0;
+					end
+				end/////////////////////////////////////0
+				else if(now==1&&ran==2'd10)begin  //////2
+					if(hex0_c==1&hex0_g==1)begin
+						now=2;
+						hex0_a=1;
+						hex0_b=1;
+						hex0_c=0;
+						hex0_g=0;
+					end
+				
+				end
+				else if(now==4&&ran==2'd10)begin
+					if(hex1_c==1&hex1_g==1)begin
+						now=5;
+						hex1_a=1;
+						hex1_b=1;
+						hex1_c=0;
+						hex1_g=0;
+					end
+				end
+				else if(now==7&&ran==2'd10)begin
+					if(hex2_c==1&hex2_g==1)begin
+						now=8;
+						hex2_a=1;
+						hex2_b=1;
+						hex2_c=0;
+						hex2_g=0;
+					end
+				end
+				else if(now==10&&ran==2'd10)begin
+					if(hex3_c==1&hex3_g==1)begin
+						now=11;
+						hex3_a=1;
+						hex3_b=1;
+						hex3_c=0;
+						hex3_g=0;
+					end
+				end//////////////////////////////////////2
+				if(now==2&&ran==2'd01)begin  ////////////1
+					if(hex0_e==1&hex0_d==1)begin
+						now=3;
+						hex0_g=1;
+						hex0_f=1;
+						hex0_e=0;
+						hex0_d=0;
+					end
+				
+				end
+				else if(now==5&&ran==2'd01)begin
+					if(hex1_e==1&hex1_d==1)begin
+						now=6;
+						hex1_g=1;
+						hex1_f=1;
+						hex1_e=0;
+						hex1_d=0;
+					end
+				end
+				else if(now==8&&ran==2'd01)begin
+					if(hex2_e==1&hex2_d==1)begin
+						now=9;
+						hex2_g=1;
+						hex2_f=1;
+						hex2_e=0;
+						hex2_d=0;
+					end
+				end
+				else if(now==11&&ran==2'd01)begin
+					if(hex3_e==1&hex3_d==1)begin
+						now=12;
+						hex3_g=1;
+						hex3_f=1;
+						hex3_e=0;
+						hex3_d=0;
+					end
+				end/////////////////////////////////////1
+				else if(now==2&&ran==2'd11)begin  //////3
+					if(hex0_c==1&hex0_d==1)begin
+						now=3;
+						hex0_b=1;
+						hex0_g=1;
+						hex0_c=0;
+						hex0_d=0;
+					end
+				
+				end
+				else if(now==5&&ran==2'd11)begin
+					if(hex1_c==1&hex1_d==1)begin
+						now=6;
+						hex1_b=1;
+						hex1_g=1;
+						hex1_c=0;
+						hex1_d=0;
+					end
+				end
+				else if(now==8&&ran==2'd11)begin
+					if(hex2_c==1&hex2_d==1)begin
+						now=9;
+						hex2_b=1;
+						hex2_g=1;
+						hex2_c=0;
+						hex2_d=0;
+					end
+				end
+				else if(now==11&&ran==2'd11)begin
+					if(hex3_c==1&hex3_d==1)begin
+						now=12;
+						hex3_b=1;
+						hex3_g=1;
+						hex3_c=0;
+						hex3_d=0;
+					end
+				end///////////////////////////////////////////3
+			end/////////////////////////////////////////////////////////////////////right
+			if(state_l)begin///////////////////////////////////////////left
+				if(now==2&&ran==2'd00)begin  ////////////0
+					if(hex0_a==1&hex0_f==1)begin
+						now=1;
+						hex0_a=0;
+						hex0_f=0;
+						hex0_e=1;
+						hex0_g=1;
+					end
+				
+				end
+				else if(now==5&&ran==2'd00)begin
+					if(hex1_a==1&hex1_f==1)begin
+						now=4;
+						hex1_a=0;
+						hex1_f=0;
+						hex1_e=1;
+						hex1_g=1;
+					end
+				end
+				else if(now==8&&ran==2'd00)begin
+					if(hex2_a==1&hex2_f==1)begin
+						now=7;
+						hex2_a=0;
+						hex2_f=0;
+						hex2_e=1;
+						hex2_g=1;
+					end
+				end
+				else if(now==11&&ran==2'd00)begin
+					if(hex3_a==1&hex3_f==1)begin
+						now=10;
+						hex3_a=0;
+						hex3_f=0;
+						hex3_e=1;
+						hex3_g=1;
+					end
+				end/////////////////////////////////////0
+				else if(now==2&&ran==2'd10)begin  //////2
+					if(hex0_a==1&hex0_b==1)begin
+						now=1;
+						hex0_a=0;
+						hex0_b=0;
+						hex0_c=1;
+						hex0_g=1;
+					end
+				
+				end
+				else if(now==5&&ran==2'd10)begin
+					if(hex1_a==1&hex1_b==1)begin
+						now=4;
+						hex1_a=0;
+						hex1_b=0;
+						hex1_c=1;
+						hex1_g=1;
+					end
+				end
+				else if(now==8&&ran==2'd10)begin
+					if(hex2_a==1&hex2_b==1)begin
+						now=7;
+						hex2_a=0;
+						hex2_b=0;
+						hex2_c=1;
+						hex2_g=1;
+					end
+				end
+				else if(now==11&&ran==2'd10)begin
+					if(hex3_a==1&hex3_b==1)begin
+						now=10;
+						hex3_a=0;
+						hex3_b=0;
+						hex3_c=1;
+						hex3_g=1;
+					end
+				end//////////////////////////////////////2
+				if(now==3&&ran==2'd01)begin  ////////////1
+					if(hex0_g==1&hex0_f==1)begin
+						now=2;
+						hex0_g=0;
+						hex0_f=0;
+						hex0_e=1;
+						hex0_d=1;
+					end
+				
+				end
+				else if(now==6&&ran==2'd01)begin
+					if(hex1_g==1&hex1_f==1)begin
+						now=5;
+						hex1_g=0;
+						hex1_f=0;
+						hex1_e=1;
+						hex1_d=1;
+					end
+				end
+				else if(now==9&&ran==2'd01)begin
+					if(hex2_g==1&hex2_f==1)begin
+						now=8;
+						hex2_g=0;
+						hex2_f=0;
+						hex2_e=1;
+						hex2_d=1;
+					end
+				end
+				else if(now==12&&ran==2'd01)begin
+					if(hex3_g==1&hex3_f==1)begin
+						now=11;
+						hex3_g=0;
+						hex3_f=0;
+						hex3_e=1;
+						hex3_d=1;
+					end
+				end/////////////////////////////////////1
+				else if(now==3&&ran==2'd11)begin  //////3
+					if(hex0_b==1&hex0_g==1)begin
+						now=2;
+						hex0_b=0;
+						hex0_g=0;
+						hex0_c=1;
+						hex0_d=1;
+					end
+				
+				end
+				else if(now==6&&ran==2'd11)begin
+					if(hex1_b==1&hex1_g==1)begin
+						now=5;
+						hex1_b=0;
+						hex1_g=0;
+						hex1_c=1;
+						hex1_d=1;
+					end
+				end
+				else if(now==9&&ran==2'd11)begin
+					if(hex2_b==1&hex2_g==1)begin
+						now=8;
+						hex2_b=0;
+						hex2_g=0;
+						hex2_c=1;
+						hex2_d=1;
+					end
+				end
+				else if(now==12&&ran==2'd11)begin
+					if(hex3_b==1&hex3_g==1)begin
+						now=11;
+						hex3_b=0;
+						hex3_g=0;
+						hex3_c=1;
+						hex3_d=1;
+					end
+				end///////////////////////////////////////////3
+			end/////////////////////////////////////////////////////////////////////left
+			state_l=0;
+			state_r=0;
+		
+			case(now) 
+				4'd1:begin
+					if(hex1_a!=0&&((ran==0&&hex1_f!=0)||(ran==2&&hex1_b!=0)))begin
+						hex0_a=1;
+						hex1_a=0;
+						now=4;
+						if(ran==0) begin
+							hex0_f=1;
+							hex1_f=0;
+						end
+						if(ran==2)begin
+							hex0_b=1;
+							hex1_b=0;
+						end
+					end
+					else begin
+						down=0;
+						toHex=1;
+						now=0;
+						endGame=1;
+					end
+				end
+				4'd2:begin
+					if(hex1_g!=0&&((ran==0&&hex1_e!=0)||(ran==2&&hex1_c!=0)||(ran==1&&hex1_f!=0)||(ran==3&&hex1_b!=0)))begin
+						hex0_g=1;
+						hex1_g=0;
+						now=5;
+						if(ran==0) begin
+							hex0_e=1;
+							hex1_e=0;
+						end
+						if(ran==1) begin
+							hex0_f=1;
+							hex1_f=0;
+						end
+						if(ran==2)begin
+							hex0_c=1;
+							hex1_c=0;
+						end
+						if(ran==3) begin
+							hex0_b=1;
+							hex1_b=0;
+						end
+					end
+					else begin
+						down=0;
+						toHex=1;
+						endGame=1;
+						now=0;
+					end
+				end
+				4'd3:begin
+					if(hex1_d!=0&&((ran==1&&hex1_e!=0)||(ran==3&&hex1_c!=0)))begin
+						hex0_d=1;
+						hex1_d=0;
+						now=6;
+						if(ran==1) begin
+							hex0_e=1;
+							hex1_e=0;
+						end
+						if(ran==3) begin
+							hex0_c=1;
+							hex1_c=0;
+						end
+					end
+					else begin
+						down=0;
+						toHex=1;
+						now=0;
+						endGame=1;
+					end
+				end
+				4'd4:begin
+					if(hex2_a!=0&&((ran==0&&hex2_f!=0)||(ran==2&&hex2_b!=0)))begin
+						hex1_a=1;
+						hex2_a=0;
+						now=7;
+						if(ran==0) begin
+							hex1_f=1;
+							hex2_f=0;
+						end
+						if(ran==2)begin
+							hex1_b=1;
+							hex2_b=0;
+						end
+					end
+					else begin
+						down=0;
+						toHex=0;
+						now=0;
+					end
+				end
+				4'd5:begin
+					if(hex2_g!=0&&((ran==0&&hex2_e!=0)||(ran==2&&hex2_c!=0)||(ran==1&&hex2_f!=0)||(ran==3&&hex2_b!=0)))begin
+						hex1_g=1;
+						hex2_g=0;
+						now=8;
+						if(ran==0) begin
+							hex1_e=1;
+							hex2_e=0;
+						end
+						if(ran==1) begin
+							hex1_f=1;
+							hex2_f=0;
+						end
+						if(ran==2)begin
+							hex1_c=1;
+							hex2_c=0;
+						end
+						if(ran==3) begin
+							hex1_b=1;
+							hex2_b=0;
+						end
+					end
+					else begin
+						down=0;
+						toHex=0;
+						now=0;
+					end
+				end
+				4'd6:begin
+					if(hex2_d!=0&&((ran==1&&hex2_e!=0)||(ran==3&&hex2_c!=0)))begin
+						hex1_d=1;
+						hex2_d=0;
+						now=9;
+						if(ran==1) begin
+							hex1_e=1;
+							hex2_e=0;
+						end
+						if(ran==3) begin
+							hex1_c=1;
+							hex2_c=0;
+						end
+					end
+					else begin
+						down=0;
+						toHex=0;
+						now=0;
+					end
+				end
+				4'd7:begin
+					if(hex3_a!=0&&((ran==0&&hex3_f!=0)||(ran==2&&hex3_b!=0)))begin
+						hex2_a=1;
+						hex3_a=0;
+						now=10;
+						if(ran==0) begin
+							hex2_f=1;
+							hex3_f=0;
+						end
+						if(ran==2)begin
+							hex2_b=1;
+							hex3_b=0;
+						end
+					end
+					else begin
+						down=0;
+						toHex=0;
+						now=0;
+					end
+				end
+				4'd8:begin
+					if(hex3_g!=0&&((ran==0&&hex3_e!=0)||(ran==2&&hex3_c!=0)||(ran==1&&hex3_f!=0)||(ran==3&&hex3_b!=0)))begin
+						hex2_g=1;
+						hex3_g=0;
+						now=11;
+						if(ran==0) begin
+							hex2_e=1;
+							hex3_e=0;
+						end
+						if(ran==1) begin
+							hex2_f=1;
+							hex3_f=0;
+						end
+						if(ran==2)begin
+							hex2_c=1;
+							hex3_c=0;
+						end
+						if(ran==3) begin
+							hex2_b=1;
+							hex3_b=0;
+						end
+					end
+					else begin
+						down=0;
+						toHex=0;
+						now=0;
+					end
+				end
+				4'd9:begin
+					if(hex3_d!=0&&((ran==1&&hex3_e!=0)||(ran==3&&hex3_c!=0)))begin
+						hex2_d=1;
+						hex3_d=0;
+						now=12;
+						if(ran==1) begin
+							hex2_e=1;
+							hex3_e=0;
+						end
+						if(ran==3) begin
+							hex2_c=1;
+							hex3_c=0;
+						end
+					end
+					else begin
+						down=0;
+						toHex=0;
+						now=0;
+					end
+				end
+				4'd0: ; //do nothing
+				default: begin
+					down=0;
+					toHex=0;
+					now=0;
+				end
+			endcase 
+			end
+			led6<=0;
+			led7<=led6;
+			led8<=led7;
+			led9<=led8;
+		end
+	end
+	if(cnt==tmp||again==1)begin
+		if(!down||again==1) begin
+		////////////////from here
+		again=0;
+		if((hex0_a==0&&hex0_g==0&&hex0_d==0)||(hex0_f==0&&hex0_e==0))begin//ok
+			if(hex0_a==0&&hex0_g==0&&hex0_d==0)begin
+				hex0_a=1;
+				hex0_g=1;
+				hex0_d=1;
+			end
+			else if(hex0_f==0&&hex0_e==0)begin
+				hex0_f=1;hex0_e=1;
+			end
+			again=1;
+			//init
+			
+			if(hex0_e==1&&hex1_c==1&&hex1_d==1)begin
+				hex1_d=hex0_d;
+				hex0_d=1;
+				if(hex0_f==1&&hex1_b==1&&hex1_g==1)begin
+					hex1_g=hex0_g;
+					hex0_g=1;
+				end
+			end
+			if(hex0_f==1&&hex1_b==1&&hex1_a==1)begin
+				hex1_a=hex0_a;
+				hex0_a=1;
+			end
+			//agd
+			if(hex0_e==1&&hex0_g==1&&hex0_d==1)begin
+				hex0_e=hex0_c;
+				hex0_c=1;
+			end
+			if(hex0_f==1&&hex0_g==1&&hex0_a==1)begin
+				hex0_f=hex0_b;
+				hex0_b=1;
+			end
+			//cb ef
+			if(hex1_c==1)begin
+				hex1_c=hex0_e;
+				hex0_e=1;
+			end
+			if(hex1_b==1)begin
+				hex1_b=hex0_f;
+				hex0_f=1;
+			end
+			//ef cb
+			////again
+			if(hex1_e==1&&hex2_c==1&&hex2_d==1)begin
+				hex2_d=hex1_d;
+				hex1_d=1;
+				if(hex1_f==1&&hex2_b==1&&hex2_g==1)begin
+					hex2_g=hex1_g;
+					hex1_g=1;
+				end
+			end
+			if(hex1_f==1&&hex2_b==1&&hex2_a==1)begin
+				hex2_a=hex1_a;
+				hex1_a=1;
+			end
+			///agd
+			if(hex1_e==1&&hex1_g==1&&hex1_d==1)begin
+				hex1_e=hex1_c;
+				if(hex1_c==0)
+					hex1_c=hex0_e;
+				else hex1_e=hex0_e;
+				hex0_e=1;
+			end
+			
+			if(hex1_f==1&&hex1_g==1&&hex1_a==1)begin
+				hex1_f=hex1_b;
+				if(hex1_b==0)
+					hex1_b=hex0_f;
+				else hex1_f=hex0_f;
+				hex0_f=1;
+			end
+			///ef cb ef
+			if(hex2_c==1)begin
+				hex2_c=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_b==1)begin
+				hex2_b=hex1_f;
+				hex1_f=1;
+			end
+			///ef cb
+			//again
+			if(hex2_e==1&&hex2_g==1&&hex2_d==1)begin
+				hex2_e=hex2_c;
+				if(hex2_c==0)
+					hex2_c=hex1_e;
+				else hex2_e=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_f==1&&hex2_g==1&&hex2_a==1)begin
+				hex2_f=hex2_b;
+				if(hex2_b==0)
+					hex2_b=hex1_f;
+				else hex2_f=hex1_f;
+				hex1_f=1;
+			end
+			if(hex3_c==1)begin
+				hex3_c=hex2_e;
+				hex2_e=1;
+			end
+			if(hex3_b==1)begin
+				hex3_b=hex2_f;
+				hex2_f=1;
+			end
+			if(hex3_e==1&&hex3_g==1&&hex3_d==1)begin
+				hex3_e=hex3_c;
+				if(hex3_c==0)
+					hex3_c=hex2_e;
+				else hex3_e=hex2_e;
+				hex2_e=1;
+			end
+			
+			if(hex3_f==1&&hex3_g==1&&hex3_a==1)begin
+				hex3_f=hex3_b;
+				if(hex3_b==0)
+					hex3_b=hex2_f;
+				else hex3_f=hex2_f;
+				hex2_f=1;
+			end
+		end
+		else if((hex1_a==0&&hex1_g==0&&hex1_d==0)||(hex1_f==0&&hex1_e==0)||(hex1_b==0&&hex1_c==0))begin//ok
+			if(hex1_a==0&&hex1_g==0&&hex1_d==0)begin
+				hex1_a=1;
+				hex1_g=1;
+				hex1_d=1;
+			end
+			else if(hex1_f==0&&hex1_e==0)begin
+				hex1_f=1;hex1_e=1;
+			end
+			else if(hex1_b==0&&hex1_c==0)begin
+				hex1_b=1;hex1_c=1;
+			end
+			again=1;
+			//init
+			if(hex1_e==1&&hex2_c==1&&hex2_d==1)begin
+				hex2_d=hex1_d;
+				hex1_d=1;
+				if(hex1_f==1&&hex2_b==1&&hex2_g==1)begin
+					hex2_g=hex1_g;
+					hex1_g=1;
+				end
+			end
+			if(hex1_f==1&&hex2_b==1&&hex2_a==1)begin
+				hex2_a=hex1_a;
+				hex1_a=1;
+			end
+			///agd
+			if(hex1_e==1&&hex1_g==1&&hex1_d==1)begin
+				hex1_e=hex1_c;
+				if(hex1_c==0)
+					hex1_c=hex0_e;
+				else hex1_e=hex0_e;
+				hex0_e=1;
+			end
+			
+			if(hex1_f==1&&hex1_g==1&&hex1_a==1)begin
+				hex1_f=hex1_b;
+				if(hex1_b==0)
+					hex1_b=hex0_f;
+				else hex1_f=hex0_f;
+				hex0_f=1;
+			end
+			///ef cb ef
+			if(hex2_c==1)begin
+				hex2_c=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_b==1)begin
+				hex2_b=hex1_f;
+				hex1_f=1;
+			end
+			///ef cb
+			//again
+			if(hex2_e==1&&hex2_g==1&&hex2_d==1)begin
+				hex2_e=hex2_c;
+				if(hex2_c==0)
+					hex2_c=hex1_e;
+				else hex2_e=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_f==1&&hex2_g==1&&hex2_a==1)begin
+				hex2_f=hex2_b;
+				if(hex2_b==0)
+					hex2_b=hex1_f;
+				else hex2_f=hex1_f;
+				hex1_f=1;
+			end
+			if(hex3_c==1)begin
+				hex3_c=hex2_e;
+				hex2_e=1;
+			end
+			if(hex3_b==1)begin
+				hex3_b=hex2_f;
+				hex2_f=1;
+			end
+			if(hex3_e==1&&hex3_g==1&&hex3_d==1)begin
+				hex3_e=hex3_c;
+				if(hex3_c==0)
+					hex3_c=hex2_e;
+				else hex3_e=hex2_e;
+				hex2_e=1;
+			end
+			
+			if(hex3_f==1&&hex3_g==1&&hex3_a==1)begin
+				hex3_f=hex3_b;
+				if(hex3_b==0)
+					hex3_b=hex2_f;
+				else hex3_f=hex2_f;
+				hex2_f=1;
+			end
+			//hex1
+			
+			if(hex0_e==1&&hex1_c==1&&hex1_d==1)begin
+				hex1_d=hex0_d;
+				hex0_d=1;
+				if(hex0_f==1&&hex1_b==1&&hex1_g==1)begin
+					hex1_g=hex0_g;
+					hex0_g=1;
+				end
+			end
+			if(hex0_f==1&&hex1_b==1&&hex1_a==1)begin
+				hex1_a=hex0_a;
+				hex0_a=1;
+			end
+			//agd
+			if(hex0_e==1&&hex0_g==1&&hex0_d==1)begin
+				hex0_e=hex0_c;
+				hex0_c=1;
+			end
+			if(hex0_f==1&&hex0_g==1&&hex0_a==1)begin
+				hex0_f=hex0_b;
+				hex0_b=1;
+			end
+			//cb ef
+			if(hex1_c==1)begin
+				hex1_c=hex0_e;
+				hex0_e=1;
+			end
+			if(hex1_b==1)begin
+				hex1_b=hex0_f;
+				hex0_f=1;
+			end
+			//ef cb
+			////again
+			if(hex1_e==1&&hex2_c==1&&hex2_d==1)begin
+				hex2_d=hex1_d;
+				hex1_d=1;
+				if(hex1_f==1&&hex2_b==1&&hex2_g==1)begin
+					hex2_g=hex1_g;
+					hex1_g=1;
+				end
+			end
+			if(hex1_f==1&&hex2_b==1&&hex2_a==1)begin
+				hex2_a=hex1_a;
+				hex1_a=1;
+			end
+			///agd
+			if(hex1_e==1&&hex1_g==1&&hex1_d==1)begin
+				hex1_e=hex1_c;
+				if(hex1_c==0)
+					hex1_c=hex0_e;
+				else hex1_e=hex0_e;
+				hex0_e=1;
+			end
+			
+			if(hex1_f==1&&hex1_g==1&&hex1_a==1)begin
+				hex1_f=hex1_b;
+				if(hex1_b==0)
+					hex1_b=hex0_f;
+				else hex1_f=hex0_f;
+				hex0_f=1;
+			end
+			///ef cb ef
+			if(hex2_c==1)begin
+				hex2_c=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_b==1)begin
+				hex2_b=hex1_f;
+				hex1_f=1;
+			end
+			///ef cb
+			//again
+			if(hex2_e==1&&hex2_g==1&&hex2_d==1)begin
+				hex2_e=hex2_c;
+				if(hex2_c==0)
+					hex2_c=hex1_e;
+				else hex2_e=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_f==1&&hex2_g==1&&hex2_a==1)begin
+				hex2_f=hex2_b;
+				if(hex2_b==0)
+					hex2_b=hex1_f;
+				else hex2_f=hex1_f;
+				hex1_f=1;
+			end
+			if(hex3_c==1)begin
+				hex3_c=hex2_e;
+				hex2_e=1;
+			end
+			if(hex3_b==1)begin
+				hex3_b=hex2_f;
+				hex2_f=1;
+			end
+			if(hex3_e==1&&hex3_g==1&&hex3_d==1)begin
+				hex3_e=hex3_c;
+				if(hex3_c==0)
+					hex3_c=hex2_e;
+				else hex3_e=hex2_e;
+				hex2_e=1;
+			end
+			
+			if(hex3_f==1&&hex3_g==1&&hex3_a==1)begin
+				hex3_f=hex3_b;
+				if(hex3_b==0)
+					hex3_b=hex2_f;
+				else hex3_f=hex2_f;
+				hex2_f=1;
+			end
+			//123 0123
+			
+		end
+		else if((hex2_a==0&&hex2_g==0&&hex2_d==0)||(hex2_f==0&&hex2_e==0)||(hex2_b==0&&hex2_c==0))begin//ok????
+			if(hex2_a==0&&hex2_g==0&&hex2_d==0)begin
+				hex2_a=1;
+				hex2_g=1;
+				hex2_d=1;
+			end
+			else if(hex2_f==0&&hex2_e==0)begin
+				hex2_f=1;hex2_e=1;
+			end
+			else if(hex2_b==0&&hex2_c==0)begin
+				hex2_b=1;hex2_c=1;
+			end
+			again=1;
+			//init
+			if(hex2_e==1&&hex3_c==1&&hex3_d==1)begin
+				hex3_d=hex2_d;
+				hex2_d=1;
+				if(hex2_f==1&&hex3_b==1&&hex3_g==1)begin
+					hex3_g=hex2_g;
+					hex2_g=1;
+				end
+			end
+			
+			if(hex2_f==1&&hex3_b==1&&hex3_a==1)begin
+				hex3_a=hex2_a;
+				hex2_a=1;
+			end
+			/// agd
+			if(hex2_e==1&&hex2_g==1&&hex2_d==1)begin
+				hex2_e=hex2_c;
+				if(hex2_c==0)
+					hex2_c=hex1_e;
+				else hex2_e=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_f==1&&hex2_g==1&&hex2_a==1)begin
+				hex2_f=hex2_b;
+				if(hex2_b==0)
+					hex2_b=hex1_f;
+				else hex2_f=hex1_f;
+				hex1_f=1;
+			end
+			if(hex3_c==1)begin
+				hex3_c=hex2_e;
+				hex2_e=1;
+			end
+			if(hex3_b==1)begin
+				hex3_b=hex2_f;
+				hex2_f=1;
+			end
+			//ef cb ef
+			//ef cb
+			//again
+			if(hex3_e==1&&hex3_g==1&&hex3_d==1)begin
+				hex3_e=hex3_c;
+				if(hex3_c==0)
+					hex3_c=hex2_e;
+				else hex3_e=hex2_e;
+				hex2_e=1;
+			end
+			
+			if(hex3_f==1&&hex3_g==1&&hex3_a==1)begin
+				hex3_f=hex3_b;
+				if(hex3_b==0)
+					hex3_b=hex2_f;
+				else hex3_f=hex2_f;
+				hex2_f=1;
+			end
+			///hex2
+			
+			if(hex1_e==1&&hex2_c==1&&hex2_d==1)begin
+				hex2_d=hex1_d;
+				hex1_d=1;
+				if(hex1_f==1&&hex2_b==1&&hex2_g==1)begin
+					hex2_g=hex1_g;
+					hex1_g=1;
+				end
+			end
+			if(hex1_f==1&&hex2_b==1&&hex2_a==1)begin
+				hex2_a=hex1_a;
+				hex1_a=1;
+			end
+			///agd
+			if(hex1_e==1&&hex1_g==1&&hex1_d==1)begin
+				hex1_e=hex1_c;
+				if(hex1_c==0)
+					hex1_c=hex0_e;
+				else hex1_e=hex0_e;
+				hex0_e=1;
+			end
+			
+			if(hex1_f==1&&hex1_g==1&&hex1_a==1)begin
+				hex1_f=hex1_b;
+				if(hex1_b==0)
+					hex1_b=hex0_f;
+				else hex1_f=hex0_f;
+				hex0_f=1;
+			end
+			///ef cb ef
+			
+			if(hex2_c==1)begin
+				hex2_c=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_b==1)begin
+				hex2_b=hex1_f;
+				hex1_f=1;
+			end
+			///ef cb
+			//again
+			if(hex2_e==1&&hex2_g==1&&hex2_d==1)begin
+				hex2_e=hex2_c;
+				if(hex2_c==0)
+					hex2_c=hex1_e;
+				else hex2_e=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_f==1&&hex2_g==1&&hex2_a==1)begin
+				hex2_f=hex2_b;
+				if(hex2_b==0)
+					hex2_b=hex1_f;
+				else hex2_f=hex1_f;
+				hex1_f=1;
+			end
+			if(hex3_c==1)begin
+				hex3_c=hex2_e;
+				hex2_e=1;
+			end
+			if(hex3_b==1)begin
+				hex3_b=hex2_f;
+				hex2_f=1;
+			end
+			
+			if(hex3_e==1&&hex3_g==1&&hex3_d==1)begin
+				hex3_e=hex3_c;
+				if(hex3_c==0)
+					hex3_c=hex2_e;
+				else hex3_e=hex2_e;
+				hex2_e=1;
+			end
+			
+			if(hex3_f==1&&hex3_g==1&&hex3_a==1)begin
+				hex3_f=hex3_b;
+				if(hex3_b==0)
+					hex3_b=hex2_f;
+				else hex3_f=hex2_f;
+				hex2_f=1;
+			end
+			//hex1
+			
+			if(hex0_e==1&&hex1_c==1&&hex1_d==1)begin
+				hex1_d=hex0_d;
+				hex0_d=1;
+				if(hex0_f==1&&hex1_b==1&&hex1_g==1)begin
+					hex1_g=hex0_g;
+					hex0_g=1;
+				end
+			end
+			if(hex0_f==1&&hex1_b==1&&hex1_a==1)begin
+				hex1_a=hex0_a;
+				hex0_a=1;
+			end
+			//agd
+			if(hex0_e==1&&hex0_g==1&&hex0_d==1)begin
+				hex0_e=hex0_c;
+				hex0_c=1;
+			end
+			if(hex0_f==1&&hex0_g==1&&hex0_a==1)begin
+				hex0_f=hex0_b;
+				hex0_b=1;
+			end
+			//cb ef
+			
+			if(hex1_c==1)begin
+				hex1_c=hex0_e;
+				hex0_e=1;
+			end
+			if(hex1_b==1)begin
+				hex1_b=hex0_f;
+				hex0_f=1;
+			end
+			//ef cb
+			////again
+			if(hex1_e==1&&hex2_c==1&&hex2_d==1)begin
+				hex2_d=hex1_d;
+				hex1_d=1;
+				if(hex1_f==1&&hex2_b==1&&hex2_g==1)begin
+					hex2_g=hex1_g;
+					hex1_g=1;
+				end
+			end
+			if(hex1_f==1&&hex2_b==1&&hex2_a==1)begin
+				hex2_a=hex1_a;
+				hex1_a=1;
+			end
+			///agd
+			if(hex1_e==1&&hex1_g==1&&hex1_d==1)begin
+				hex1_e=hex1_c;
+				if(hex1_c==0)
+					hex1_c=hex0_e;
+				else hex1_e=hex0_e;
+				hex0_e=1;
+			end
+			
+			if(hex1_f==1&&hex1_g==1&&hex1_a==1)begin
+				hex1_f=hex1_b;
+				if(hex1_b==0)
+					hex1_b=hex0_f;
+				else hex1_f=hex0_f;
+				hex0_f=1;
+			end
+			///ef cb ef
+			if(hex2_c==1)begin
+				hex2_c=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_b==1)begin
+				hex2_b=hex1_f;
+				hex1_f=1;
+			end
+			///ef cb
+			//again
+			if(hex2_e==1&&hex2_g==1&&hex2_d==1)begin
+				hex2_e=hex2_c;
+				if(hex2_c==0)
+					hex2_c=hex1_e;
+				else hex2_e=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_f==1&&hex2_g==1&&hex2_a==1)begin
+				hex2_f=hex2_b;
+				if(hex2_b==0)
+					hex2_b=hex1_f;
+				else hex2_f=hex1_f;
+				hex1_f=1;
+			end
+			if(hex3_c==1)begin
+				hex3_c=hex2_e;
+				hex2_e=1;
+			end
+			if(hex3_b==1)begin
+				hex3_b=hex2_f;
+				hex2_f=1;
+			end
+			if(hex3_e==1&&hex3_g==1&&hex3_d==1)begin
+				hex3_e=hex3_c;
+				if(hex3_c==0)
+					hex3_c=hex2_e;
+				else hex3_e=hex2_e;
+				hex2_e=1;
+			end
+			
+			if(hex3_f==1&&hex3_g==1&&hex3_a==1)begin
+				hex3_f=hex3_b;
+				if(hex3_b==0)
+					hex3_b=hex2_f;
+				else hex3_f=hex2_f;
+				hex2_f=1;
+			end
+			//hex0
+		end
+		else if((hex3_a==0&&hex3_g==0&&hex3_d==0)||(hex3_f==0&&hex3_e==0)||(hex3_b==0&&hex3_c==0))begin//ok
+			if(hex3_a==0&&hex3_g==0&&hex3_d==0)begin
+				hex3_a=1;
+				hex3_g=1;
+				hex3_d=1;
+			end
+			else if(hex3_f==0&&hex3_e==0)begin
+				hex3_f=1;hex3_e=1;
+			end
+			else if(hex3_b==0&&hex3_c==0)begin
+				hex3_b=1;hex3_c=1;
+			end
+			again=1;
+			////init
+			
+			if(hex3_e==1&&hex3_g==1&&hex3_d==1)begin
+				hex3_e=hex3_c;
+				if(hex3_c==0)
+					hex3_c=hex2_e;
+				else hex3_e=hex2_e;
+				hex2_e=1;
+			end
+			
+			if(hex3_f==1&&hex3_g==1&&hex3_a==1)begin
+				hex3_f=hex3_b;
+				if(hex3_b==0)
+					hex3_b=hex2_f;
+				else hex3_f=hex2_f;
+				hex2_f=1;
+			end
+			////hex3 ef cb ef
+			
+			if(hex2_e==1&&hex3_c==1&&hex3_d==1)begin
+				hex3_d=hex2_d;
+				hex2_d=1;
+				if(hex2_f==1&&hex3_b==1&&hex3_g==1)begin
+					hex3_g=hex2_g;
+					hex2_g=1;
+				end
+			end
+			
+			if(hex2_f==1&&hex3_b==1&&hex3_a==1)begin
+				hex3_a=hex2_a;
+				hex2_a=1;
+			end
+			/// agd
+			if(hex2_e==1&&hex2_g==1&&hex2_d==1)begin
+				hex2_e=hex2_c;
+				if(hex2_c==0)
+					hex2_c=hex1_e;
+				else hex2_e=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_f==1&&hex2_g==1&&hex2_a==1)begin
+				hex2_f=hex2_b;
+				if(hex2_b==0)
+					hex2_b=hex1_f;
+				else hex2_f=hex1_f;
+				hex1_f=1;
+			end
+			if(hex3_c==1)begin
+				hex3_c=hex2_e;
+				hex2_e=1;
+			end
+			if(hex3_b==1)begin
+				hex3_b=hex2_f;
+				hex2_f=1;
+			end
+			//ef cb ef
+			//ef cb
+			//again
+			if(hex3_e==1&&hex3_g==1&&hex3_d==1)begin
+				hex3_e=hex3_c;
+				if(hex3_c==0)
+					hex3_c=hex2_e;
+				else hex3_e=hex2_e;
+				hex2_e=1;
+			end
+			
+			if(hex3_f==1&&hex3_g==1&&hex3_a==1)begin
+				hex3_f=hex3_b;
+				if(hex3_b==0)
+					hex3_b=hex2_f;
+				else hex3_f=hex2_f;
+				hex2_f=1;
+			end
+			///hex2
+			
+			if(hex1_e==1&&hex2_c==1&&hex2_d==1)begin
+				hex2_d=hex1_d;
+				hex1_d=1;
+				if(hex1_f==1&&hex2_b==1&&hex2_g==1)begin
+					hex2_g=hex1_g;
+					hex1_g=1;
+				end
+			end
+			if(hex1_f==1&&hex2_b==1&&hex2_a==1)begin
+				hex2_a=hex1_a;
+				hex1_a=1;
+			end
+			///agd
+			if(hex1_e==1&&hex1_g==1&&hex1_d==1)begin
+				hex1_e=hex1_c;
+				if(hex1_c==0)
+					hex1_c=hex0_e;
+				else hex1_e=hex0_e;
+				hex0_e=1;
+			end
+			
+			if(hex1_f==1&&hex1_g==1&&hex1_a==1)begin
+				hex1_f=hex1_b;
+				if(hex1_b==0)
+					hex1_b=hex0_f;
+				else hex1_f=hex0_f;
+				hex0_f=1;
+			end
+			///ef cb ef
+			if(hex2_c==1)begin
+				hex2_c=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_b==1)begin
+				hex2_b=hex1_f;
+				hex1_f=1;
+			end
+			///ef cb
+			//again
+			if(hex2_e==1&&hex2_g==1&&hex2_d==1)begin
+				hex2_e=hex2_c;
+				if(hex2_c==0)
+					hex2_c=hex1_e;
+				else hex2_e=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_f==1&&hex2_g==1&&hex2_a==1)begin
+				hex2_f=hex2_b;
+				if(hex2_b==0)
+					hex2_b=hex1_f;
+				else hex2_f=hex1_f;
+				hex1_f=1;
+			end
+			if(hex3_c==1)begin
+				hex3_c=hex2_e;
+				hex2_e=1;
+			end
+			if(hex3_b==1)begin
+				hex3_b=hex2_f;
+				hex2_f=1;
+			end
+			if(hex3_e==1&&hex3_g==1&&hex3_d==1)begin
+				hex3_e=hex3_c;
+				if(hex3_c==0)
+					hex3_c=hex2_e;
+				else hex3_e=hex2_e;
+				hex2_e=1;
+			end
+			
+			if(hex3_f==1&&hex3_g==1&&hex3_a==1)begin
+				hex3_f=hex3_b;
+				if(hex3_b==0)
+					hex3_b=hex2_f;
+				else hex3_f=hex2_f;
+				hex2_f=1;
+			end
+			//hex1
+			
+			if(hex0_e==1&&hex1_c==1&&hex1_d==1)begin
+				hex1_d=hex0_d;
+				hex0_d=1;
+				if(hex0_f==1&&hex1_b==1&&hex1_g==1)begin
+					hex1_g=hex0_g;
+					hex0_g=1;
+				end
+			end
+			if(hex0_f==1&&hex1_b==1&&hex1_a==1)begin
+				hex1_a=hex0_a;
+				hex0_a=1;
+			end
+			//agd
+			if(hex0_e==1&&hex0_g==1&&hex0_d==1)begin
+				hex0_e=hex0_c;
+				hex0_c=1;
+			end
+			if(hex0_f==1&&hex0_g==1&&hex0_a==1)begin
+				hex0_f=hex0_b;
+				hex0_b=1;
+			end
+			//cb ef
+			if(hex1_c==1)begin
+				hex1_c=hex0_e;
+				hex0_e=1;
+			end
+			if(hex1_b==1)begin
+				hex1_b=hex0_f;
+				hex0_f=1;
+			end
+			//ef cb
+			////again
+			if(hex1_e==1&&hex2_c==1&&hex2_d==1)begin
+				hex2_d=hex1_d;
+				hex1_d=1;
+				if(hex1_f==1&&hex2_b==1&&hex2_g==1)begin
+					hex2_g=hex1_g;
+					hex1_g=1;
+				end
+			end
+			if(hex1_f==1&&hex2_b==1&&hex2_a==1)begin
+				hex2_a=hex1_a;
+				hex1_a=1;
+			end
+			///agd
+			if(hex1_e==1&&hex1_g==1&&hex1_d==1)begin
+				hex1_e=hex1_c;
+				if(hex1_c==0)
+					hex1_c=hex0_e;
+				else hex1_e=hex0_e;
+				hex0_e=1;
+			end
+			
+			if(hex1_f==1&&hex1_g==1&&hex1_a==1)begin
+				hex1_f=hex1_b;
+				if(hex1_b==0)
+					hex1_b=hex0_f;
+				else hex1_f=hex0_f;
+				hex0_f=1;
+			end
+			///ef cb ef
+			if(hex2_c==1)begin
+				hex2_c=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_b==1)begin
+				hex2_b=hex1_f;
+				hex1_f=1;
+			end
+			///ef cb
+			//again
+			if(hex2_e==1&&hex2_g==1&&hex2_d==1)begin
+				hex2_e=hex2_c;
+				if(hex2_c==0)
+					hex2_c=hex1_e;
+				else hex2_e=hex1_e;
+				hex1_e=1;
+			end
+			if(hex2_f==1&&hex2_g==1&&hex2_a==1)begin
+				hex2_f=hex2_b;
+				if(hex2_b==0)
+					hex2_b=hex1_f;
+				else hex2_f=hex1_f;
+				hex1_f=1;
+			end
+			if(hex3_c==1)begin
+				hex3_c=hex2_e;
+				hex2_e=1;
+			end
+			if(hex3_b==1)begin
+				hex3_b=hex2_f;
+				hex2_f=1;
+			end
+			if(hex3_e==1&&hex3_g==1&&hex3_d==1)begin
+				hex3_e=hex3_c;
+				if(hex3_c==0)
+					hex3_c=hex2_e;
+				else hex3_e=hex2_e;
+				hex2_e=1;
+			end
+			
+			if(hex3_f==1&&hex3_g==1&&hex3_a==1)begin
+				hex3_f=hex3_b;
+				if(hex3_b==0)
+					hex3_b=hex2_f;
+				else hex3_f=hex2_f;
+				hex2_f=1;
+			end
+			//hex0
+		end
+		else if(hex0_b==0&&hex0_c==0)begin//ok
+			hex0_b=1;
+			hex0_b=1;
+			again=1;
+		end
+	//////////////////to here
+		end
+	end
+end
+endmodule
