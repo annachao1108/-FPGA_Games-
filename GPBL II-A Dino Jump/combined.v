@@ -1,0 +1,158 @@
+module count(
+  input wire clk,
+  input wire switch1,switch2, 
+
+  output reg [9:0] led,
+  output reg [7:0] map3, map2, map1, map0
+);
+
+	reg [9:0] counter = 10'b0000000000;
+	reg [31:0] clk_count = 32'b0;
+	reg [31:0] seed = 32'b0;
+	reg [31:0] result;
+	reg [31:0] newRes;
+	
+	reg [7:0] upBarrier        = 8'b01110101;
+    reg [7:0] downBarrier      = 8'b01110011;
+    reg [7:0] flat             = 8'b01110111;
+    
+    reg [7:0] dinoUp           = 8'b10010100;
+    reg [7:0] dinoDown         = 8'b10100011;
+    
+	reg [7:0] newMap0;
+    reg [7:0] newMap1;
+    reg [7:0] newMap2;
+    reg [7:0] newMap3;   
+	// status code 
+	// 000: reset           001:win     010:lose
+	// 011: refresh map (also refresh led)   
+	reg [1:0] status = 3'b000;
+	
+	// define the map
+	
+	always @(posedge clk) begin
+		clk_count <= clk_count + 1;
+		seed <= seed + 1;
+			
+		if (clk_count >= 50000000) begin
+			// if the score counter more than 10'b1111111111, define it as winning
+			if (counter >= 10'b1111111111) begin
+				status <= 3'b001;
+			end 
+			else if (status == 3'b011) begin
+				counter <= counter + 10'b0000000001;
+				seed <= (seed + 1)%1000007;
+				result <= seed ^ (seed >> 1) ^ (seed >> 3) ^ (seed >> 6); 
+				
+				// generate the map0
+				if( map0 == upBarrier) begin
+					newRes <= result % 2;
+					if( newRes == 0 ) begin
+						newMap0 <= flat;
+					end
+					else begin
+						newMap0 <= upBarrier;
+					end
+				end				
+				else if(map0 == downBarrier) begin
+					newRes <= result % 2;				
+					if( newRes == 0 ) begin
+						newMap0 <= flat;
+					end
+					else begin
+						newMap0 <= downBarrier;
+					end
+				end
+				else /* if (map3 == flat)*/ begin
+					newRes <= result % 3;
+					if( newRes == 0 ) begin
+						newMap0 <= flat;
+					end
+					else if (newRes == 1)begin
+						newMap0 <= downBarrier;
+					end
+					else begin
+						newMap0 <= upBarrier;
+					end
+				end 
+				
+				newMap1 <= map0;	// copy the map0 -> newMap1
+				newMap2 <= map1;	// copy the map1 -> newMap2
+				newMap3 <= map2;	// copy the map2 -> newMap3
+				
+				//check the graph, if die, change the status 
+				if(switch2 == 1'b0) begin
+					if(map2 == downBarrier) begin
+						status <= 3'b010;
+					end
+				end
+				else begin
+					if(map2 == upBarrier) begin
+						status <= 3'b010;
+					end
+				end
+				
+			end 
+
+			if(switch1 == 1'b0) begin
+				status <= 3'b000;
+			end
+
+			clk_count <= 0;
+		end
+
+		// check command status
+		case (status)
+			3'b000: begin // reset
+				if(switch1 == 1'b1) begin
+					counter <= 10'b0000000000;
+					status <= 3'b011;
+					newMap0 <= flat;
+					newMap1 <= flat;
+					newMap2 <= flat;
+					newMap3 <= flat;
+				end
+				led <= 10'b0;
+				map3 <= flat;
+				map2 <= flat;
+				map1 <= flat;
+				map0 <= flat;
+			end
+
+			3'b001: begin // win
+				map3 <= 8'b10001100;//S
+				map2 <= 8'b10001000;//S    
+				map1 <= 8'b10010010;//A
+				map0 <= 8'b10010010;//P
+				led <= 10'b0;
+			end
+			  
+			3'b010: begin // lose
+				counter <= 10'b0000000000;
+				map3 <= 8'b11000111;//L
+				map2 <= 8'b11000000;//O	
+				map1 <= 8'b10010010;//S
+				map0 <= 8'b10000110;//E	
+			end
+			
+			3'b011: begin // next frame
+				map0 <= newMap0;
+				map1 <= newMap1;
+				map2 <= newMap2;
+				if(switch2 == 1'b0) begin
+					map3 <= dinoDown;
+					if(newMap3 == upBarrier) begin
+						map3[1] <= 1'b0;
+					end
+				end
+				else begin
+					map3 <= dinoUp;
+					if(newMap3 == downBarrier) begin
+						map3[2] <= 1'b0;
+					end
+				end
+			    led <= counter;
+			end 
+		endcase
+	end
+endmodule 
