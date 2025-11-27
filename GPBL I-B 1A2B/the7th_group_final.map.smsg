@@ -1,0 +1,2 @@
+Warning (10268): Verilog HDL information at the7th_group_final.v(89): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at the7th_group_final.v(147): always construct contains both blocking and non-blocking assignments
