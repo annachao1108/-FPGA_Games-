@@ -1,0 +1,215 @@
+module test (
+  input rst, clk,
+  input wire button0,
+  input  button1,
+  input wire [7:0] SW,
+  output wire [9:0] LED,
+  output  reg[6:0] HEX0,
+  output  reg[6:0] HEX1
+);
+  wire clk1h;
+  reg [7:0] count;
+  reg reset;
+  reg [6:0] count_display;
+  reg [6:0] count_display1;
+  divide #  
+(
+.WIDTH(27),
+.N(50_000_000)
+)
+(
+.clk(clk),
+.rst_n(rst),
+.clkout(clk1h)
+);
+password u2
+(
+  .SW(SW), 
+  .LED(LED) 
+);
+  initial begin
+    count[7:4] <= 4'd06;
+count[3:0] <= 4'd0;  // 賦予 count 初始值
+  end
+always @(posedge clk1h or negedge rst) begin
+  if (!rst) begin
+count[7:4] <= 4'd06;
+count[3:0] <= 4'd0;
+   end
+    else
+    begin
+    if(count[3:0] == 4'd0)
+    begin
+    if(count[7:4] == 4'd0)
+    begin
+    count [3:0] <= 4'd08;
+    count [7:4] <= 4'd08;
+    end
+    else
+    begin
+    count [3:0] <= 4'd09;
+    count [7:4] <=  count [7:4]- 4'd01;
+    end
+    end
+    else if( count [7:4] <= 4'd07)
+    begin
+    count[3:0] <= count[3:0] - 4'd01;
+    end
+    if(LED[8] && LED[9]) // bingo
+   begin
+   count [3:0] <= 4'd07;
+        count [7:4] <= 4'd07;
+   end
+   end
+   end
+   
+
+   always @ (posedge clk) begin
+   if(count[3:0] == 4'd0)
+   HEX0 <= 7'b1000000;
+   else if(count[3:0] == 4'd01)
+   HEX0 <= 7'b1111001;
+   else if(count[3:0] == 4'd02)
+   HEX0 <= 7'b0100100;
+   else if(count[3:0] == 4'd03)
+   HEX0 <= 7'b0110000;
+   else if(count[3:0] == 4'd04)
+   HEX0 <= 7'b0011001;
+   else if(count[3:0] == 4'd05)
+   HEX0 <= 7'b0010010;
+   else if(count[3:0] == 4'd06)
+   HEX0 <= 7'b0000010;
+   else if(count[3:0] == 4'd07)
+   HEX0 <= 7'b1111000;
+   else if(count[3:0] == 4'd08)
+   HEX0 <= 7'b0000000;
+   else if(count[3:0] == 4'd09)
+   HEX0 <= 7'b0011000;
+   
+   if(count[7:4] == 4'd0)
+   HEX1 <= 7'b1000000;
+   else if(count[7:4] == 4'd01)
+   HEX1 <= 7'b1111001;
+   else if(count[7:4] == 4'd02)
+   HEX1 <= 7'b0100100;
+   else if(count[7:4] == 4'd03)
+   HEX1 <= 7'b0110000;
+   else if(count[7:4] == 4'd04)
+   HEX1 <= 7'b0011001;
+   else if(count[7:4] == 4'd05)
+   HEX1 <= 7'b0010010;
+   else if(count[7:4]== 4'd06)
+   HEX1 <= 7'b0000010;
+   else if(count[7:4] == 4'd07)
+   HEX1 <= 7'b1111000;
+   else if(count[7:4] == 4'd08)
+   HEX1 <= 7'b0000000;
+   else if(count[7:4] == 4'd09)
+   HEX1 <= 7'b0011000;
+end
+   
+
+endmodule
+module divide #
+(                            
+parameter WIDTH    =    27,    //2**(WIDTH-1)
+parameter N        =    50_000_000 //确保 N<2**(WIDTH-1)，
+)
+(
+input clk, //clk頻率
+input rst_n, //复位信，低有效，
+output clkout
+);
+reg    [WIDTH-1:0]    cnt_p,cnt_n;
+reg    clk_p,clk_n;
+always @(posedge clk or negedge rst_n)    
+    begin        
+        if(!rst_n)
+            cnt_p <= 1'b0;
+        else if(cnt_p == (N-1))
+            cnt_p <= 1'b0;
+        else
+            cnt_p <= cnt_p + 1'b1;
+    end
+//上升沿
+always @(posedge clk or negedge rst_n)
+    begin
+        if(!rst_n)
+            clk_p <= 1'b0;
+        else if(cnt_p < (N>>1)) //N>>1表示右移一位
+            clk_p <= 1'b0;
+        else
+            clk_p <= 1'b1;
+    end
+//下降沿            
+always @(negedge clk or negedge rst_n)
+    begin
+        if(!rst_n)
+            cnt_n <= 1'b0;
+        else if(cnt_n == (N-1))
+            cnt_n <= 1'b0;
+        else
+            cnt_n <= cnt_n + 1'b1;
+    end
+//下降沿
+always @(negedge clk or negedge rst_n)
+    begin
+        if(!rst_n)
+            clk_n <= 1'b0;
+        else if(cnt_n < (N>>1))  
+            clk_n <= 1'b0;
+        else
+            clk_n <= 1'b1;  
+    end
+wire    clk1 = clk;
+wire    clk2 = clk_p;
+wire    clk3 = clk_p & clk_n;
+assign clkout = (N==1)? clk1:(N[0]? clk3:clk2);    //輸出條件判斷
+endmodule
+
+module password
+(
+  input wire [7:0] SW, // 密碼
+  output reg [9:0] LED // LED
+);
+  reg [7:0] password;
+  wire [7:0] guess;
+
+  assign guess[7:0] = SW[7:0];
+
+ initial // 密碼
+  begin
+    password[0] = 1;
+     password[1] = 0;
+      password[2] = 1;
+       password[3] = 0;
+        password[4] = 1;
+         password[5] = 1;
+          password[6] = 0;
+           password[7] = 1;    
+  end
+
+  always @(guess, password) // 猜密碼
+  begin
+    if (guess[7:0] > password) // 比答案大
+    begin
+      LED[8] = 1'b1; // LED8亮
+      LED[9] = 1'b0; // LED9暗
+    end
+    else if (guess < password) // 比答案較小
+    begin
+      LED[8] = 1'b0; // LED8暗
+      LED[9] = 1'b1; // LED9亮
+    end
+    else // 正確
+    begin
+      LED[8] = 1'b1; // LED8light
+      LED[9] = 1'b1; // LED9light
+    end
+  end
+ 
+  always @ (*)
+  begin
+  LED[7:0] = SW[7:0]; // 輸出led
+  end
+endmodule
