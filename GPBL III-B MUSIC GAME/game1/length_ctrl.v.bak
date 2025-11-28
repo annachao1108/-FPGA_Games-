@@ -1,0 +1,4 @@
+module length_ctrl(	
+						input[2:0] length,
+						
+						);
