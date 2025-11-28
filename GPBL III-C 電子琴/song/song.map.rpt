@@ -1,0 +1,414 @@
+Analysis & Synthesis report for song
+Tue Nov 25 09:17:18 2025
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. Registers Removed During Synthesis
+ 10. General Register Statistics
+ 11. Registers Packed Into Inferred Megafunctions
+ 12. Source assignments for altsyncram:WideOr3_rtl_0|altsyncram_9ov:auto_generated
+ 13. Parameter Settings for User Entity Instance: Top-level Entity: |song
+ 14. Parameter Settings for Inferred Entity Instance: altsyncram:WideOr3_rtl_0
+ 15. altsyncram Parameter Settings by Entity Instance
+ 16. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                      ;
++------------------------------------+----------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Tue Nov 25 09:17:15 2025        ;
+; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
+; Revision Name                      ; song                                         ;
+; Top-level Entity Name              ; song                                         ;
+; Family                             ; Cyclone III                                  ;
+; Total logic elements               ; 145                                          ;
+;     Total combinational functions  ; 145                                          ;
+;     Dedicated logic registers      ; 60                                           ;
+; Total registers                    ; 60                                           ;
+; Total pins                         ; 2                                            ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 1,536                                        ;
+; Embedded Multiplier 9-bit elements ; 0                                            ;
+; Total PLLs                         ; 0                                            ;
++------------------------------------+----------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP3C16F484C6       ;                    ;
+; Top-level entity name                                                      ; song               ; song               ;
+; Family name                                                                ; Cyclone III        ; Stratix II         ;
+; Type of Retiming Performed During Resynthesis                              ; Full               ;                    ;
+; Resynthesis Optimization Effort                                            ; Normal             ;                    ;
+; Physical Synthesis Level for Resynthesis                                   ; Normal             ;                    ;
+; Use Generated Physical Constraints File                                    ; On                 ;                    ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Show Parameter Settings Tables in Synthesis Report                         ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 10     ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                    ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                          ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------+
+; song.v                           ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255B-18/song/song.v                ;
+; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/altsyncram.tdf                        ;
+; db/altsyncram_9ov.tdf            ; yes             ; Auto-Generated Megafunction  ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255B-18/song/db/altsyncram_9ov.tdf ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 145       ;
+;                                             ;           ;
+; Total combinational functions               ; 145       ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 63        ;
+;     -- 3 input functions                    ; 25        ;
+;     -- <=2 input functions                  ; 57        ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 99        ;
+;     -- arithmetic mode                      ; 46        ;
+;                                             ;           ;
+; Total registers                             ; 60        ;
+;     -- Dedicated logic registers            ; 60        ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 2         ;
+; Total memory bits                           ; 1536      ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 66        ;
+; Total fan-out                               ; 680       ;
+; Average fan-out                             ; 3.16      ;
++---------------------------------------------+-----------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                             ;
++---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node            ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                          ; Library Name ;
++---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------+--------------+
+; |song                                 ; 145 (145)         ; 60 (60)      ; 1536        ; 0            ; 0       ; 0         ; 2    ; 0            ; |song                                                        ; work         ;
+;    |altsyncram:WideOr3_rtl_0|         ; 0 (0)             ; 0 (0)        ; 1536        ; 0            ; 0       ; 0         ; 0    ; 0            ; |song|altsyncram:WideOr3_rtl_0                               ;              ;
+;       |altsyncram_9ov:auto_generated| ; 0 (0)             ; 0 (0)        ; 1536        ; 0            ; 0       ; 0         ; 0    ; 0            ; |song|altsyncram:WideOr3_rtl_0|altsyncram_9ov:auto_generated ;              ;
++---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                        ;
++-------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+--------------------+
+; Name                                                              ; Type ; Mode ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF                ;
++-------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+--------------------+
+; altsyncram:WideOr3_rtl_0|altsyncram_9ov:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 256          ; 6            ; --           ; --           ; 1536 ; song.song0.rtl.mif ;
++-------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+--------------------+
+
+
++------------------------------------------------------------------+
+; Registers Removed During Synthesis                               ;
++---------------------------------------+--------------------------+
+; Register name                         ; Reason for Removal       ;
++---------------------------------------+--------------------------+
+; count_end[5]                          ; Merged with count_end[8] ;
+; Total Number of Removed Registers = 1 ;                          ;
++---------------------------------------+--------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 60    ;
+; Number of registers using Synchronous Clear  ; 41    ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 18    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++----------------------------------------------+
+; Registers Packed Into Inferred Megafunctions ;
++---------------+--------------+---------------+
+; Register Name ; Megafunction ; Type          ;
++---------------+--------------+---------------+
+; count_end[13] ; WideOr3~0    ; ROM           ;
+; count_end[3]  ; WideOr3~0    ; ROM           ;
+; count_end[16] ; WideOr3~0    ; ROM           ;
+; count_end[9]  ; WideOr3~0    ; ROM           ;
+; count_end[2]  ; WideOr3~0    ; ROM           ;
+; count_end[0]  ; WideOr3~0    ; ROM           ;
++---------------+--------------+---------------+
+
+
++-------------------------------------------------------------------------------+
+; Source assignments for altsyncram:WideOr3_rtl_0|altsyncram_9ov:auto_generated ;
++---------------------------------+--------------------+------+-----------------+
+; Assignment                      ; Value              ; From ; To              ;
++---------------------------------+--------------------+------+-----------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -               ;
++---------------------------------+--------------------+------+-----------------+
+
+
++----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |song ;
++----------------+-------------------+---------------------------------+
+; Parameter Name ; Value             ; Type                            ;
++----------------+-------------------+---------------------------------+
+; L_3            ; 10010100001001010 ; Unsigned Binary                 ;
+; L_5            ; 01111100100100000 ; Unsigned Binary                 ;
+; L_6            ; 01101110111110010 ; Unsigned Binary                 ;
+; L_7            ; 01100010110111010 ; Unsigned Binary                 ;
+; M_1            ; 01011101010011110 ; Unsigned Binary                 ;
+; M_2            ; 01010011001001000 ; Unsigned Binary                 ;
+; M_3            ; 01001010000011111 ; Unsigned Binary                 ;
+; M_5            ; 00111110010010000 ; Unsigned Binary                 ;
+; M_6            ; 00110111011111001 ; Unsigned Binary                 ;
+; H_1            ; 00101110101010001 ; Unsigned Binary                 ;
+; TIME           ; 12000000          ; Signed Integer                  ;
++----------------+-------------------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: altsyncram:WideOr3_rtl_0  ;
++------------------------------------+----------------------+----------------+
+; Parameter Name                     ; Value                ; Type           ;
++------------------------------------+----------------------+----------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped        ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY     ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY   ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE   ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped        ;
+; OPERATION_MODE                     ; ROM                  ; Untyped        ;
+; WIDTH_A                            ; 6                    ; Untyped        ;
+; WIDTHAD_A                          ; 8                    ; Untyped        ;
+; NUMWORDS_A                         ; 256                  ; Untyped        ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped        ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped        ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped        ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped        ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped        ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped        ;
+; WIDTH_B                            ; 1                    ; Untyped        ;
+; WIDTHAD_B                          ; 1                    ; Untyped        ;
+; NUMWORDS_B                         ; 1                    ; Untyped        ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped        ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped        ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped        ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped        ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped        ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped        ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped        ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped        ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped        ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped        ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped        ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped        ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Untyped        ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped        ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped        ;
+; BYTE_SIZE                          ; 8                    ; Untyped        ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped        ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped        ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped        ;
+; INIT_FILE                          ; song.song0.rtl.mif   ; Untyped        ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped        ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped        ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped        ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped        ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped        ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped        ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped        ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped        ;
+; ENABLE_ECC                         ; FALSE                ; Untyped        ;
+; DEVICE_FAMILY                      ; Cyclone III          ; Untyped        ;
+; CBXI_PARAMETER                     ; altsyncram_9ov       ; Untyped        ;
++------------------------------------+----------------------+----------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                     ;
++-------------------------------------------+--------------------------+
+; Name                                      ; Value                    ;
++-------------------------------------------+--------------------------+
+; Number of entity instances                ; 1                        ;
+; Entity Instance                           ; altsyncram:WideOr3_rtl_0 ;
+;     -- OPERATION_MODE                     ; ROM                      ;
+;     -- WIDTH_A                            ; 6                        ;
+;     -- NUMWORDS_A                         ; 256                      ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED             ;
+;     -- WIDTH_B                            ; 1                        ;
+;     -- NUMWORDS_B                         ; 1                        ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                   ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED             ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                     ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                ;
++-------------------------------------------+--------------------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+    Info: Processing started: Tue Nov 25 09:16:18 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off song -c song
+Info: Found 1 design units, including 1 entities, in source file song.v
+    Info: Found entity 1: song
+Info: Elaborating entity "song" for the top level hierarchy
+Info: Inferred 1 megafunctions from design logic
+    Info: Inferred altsyncram megafunction from the following design logic: "WideOr3~0"
+        Info: Parameter OPERATION_MODE set to ROM
+        Info: Parameter WIDTH_A set to 6
+        Info: Parameter WIDTHAD_A set to 8
+        Info: Parameter NUMWORDS_A set to 256
+        Info: Parameter OUTDATA_REG_A set to UNREGISTERED
+        Info: Parameter RAM_BLOCK_TYPE set to AUTO
+        Info: Parameter INIT_FILE set to song.song0.rtl.mif
+Info: Elaborated megafunction instantiation "altsyncram:WideOr3_rtl_0"
+Info: Instantiated megafunction "altsyncram:WideOr3_rtl_0" with the following parameter:
+    Info: Parameter "OPERATION_MODE" = "ROM"
+    Info: Parameter "WIDTH_A" = "6"
+    Info: Parameter "WIDTHAD_A" = "8"
+    Info: Parameter "NUMWORDS_A" = "256"
+    Info: Parameter "OUTDATA_REG_A" = "UNREGISTERED"
+    Info: Parameter "RAM_BLOCK_TYPE" = "AUTO"
+    Info: Parameter "INIT_FILE" = "song.song0.rtl.mif"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_9ov.tdf
+    Info: Found entity 1: altsyncram_9ov
+Info: Timing-Driven Synthesis is running
+Info: Implemented 153 device resources after synthesis - the final resource count might be different
+    Info: Implemented 1 input pins
+    Info: Implemented 1 output pins
+    Info: Implemented 145 logic cells
+    Info: Implemented 6 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 233 megabytes
+    Info: Processing ended: Tue Nov 25 09:17:20 2025
+    Info: Elapsed time: 00:01:02
+    Info: Total CPU time (on all processors): 00:00:08
+
+
