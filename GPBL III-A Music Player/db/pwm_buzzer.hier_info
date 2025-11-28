@@ -1,0 +1,67 @@
+|pwm_buzzer
+clk => clk.IN1
+rst_n => rst_n.IN1
+key_in => key_in.IN1
+buzzer <= buzzer~reg0.DB_MAX_OUTPUT_PORT_TYPE
+led[0] <= led.DB_MAX_OUTPUT_PORT_TYPE
+led[1] <= led.DB_MAX_OUTPUT_PORT_TYPE
+led[2] <= led.DB_MAX_OUTPUT_PORT_TYPE
+led[3] <= led.DB_MAX_OUTPUT_PORT_TYPE
+led[4] <= led.DB_MAX_OUTPUT_PORT_TYPE
+led[5] <= led.DB_MAX_OUTPUT_PORT_TYPE
+led[6] <= led.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|pwm_buzzer|key_debounce:u_key_debounce
+clk => press~reg0.CLK
+clk => delay_flag.CLK
+clk => delay_cnt[0].CLK
+clk => delay_cnt[1].CLK
+clk => delay_cnt[2].CLK
+clk => delay_cnt[3].CLK
+clk => delay_cnt[4].CLK
+clk => delay_cnt[5].CLK
+clk => delay_cnt[6].CLK
+clk => delay_cnt[7].CLK
+clk => delay_cnt[8].CLK
+clk => delay_cnt[9].CLK
+clk => delay_cnt[10].CLK
+clk => delay_cnt[11].CLK
+clk => delay_cnt[12].CLK
+clk => delay_cnt[13].CLK
+clk => delay_cnt[14].CLK
+clk => delay_cnt[15].CLK
+clk => delay_cnt[16].CLK
+clk => delay_cnt[17].CLK
+clk => delay_cnt[18].CLK
+clk => delay_cnt[19].CLK
+clk => key_r1.CLK
+clk => key_r0.CLK
+rst_n => delay_cnt[0].ACLR
+rst_n => delay_cnt[1].ACLR
+rst_n => delay_cnt[2].ACLR
+rst_n => delay_cnt[3].ACLR
+rst_n => delay_cnt[4].ACLR
+rst_n => delay_cnt[5].ACLR
+rst_n => delay_cnt[6].ACLR
+rst_n => delay_cnt[7].ACLR
+rst_n => delay_cnt[8].ACLR
+rst_n => delay_cnt[9].ACLR
+rst_n => delay_cnt[10].ACLR
+rst_n => delay_cnt[11].ACLR
+rst_n => delay_cnt[12].ACLR
+rst_n => delay_cnt[13].ACLR
+rst_n => delay_cnt[14].ACLR
+rst_n => delay_cnt[15].ACLR
+rst_n => delay_cnt[16].ACLR
+rst_n => delay_cnt[17].ACLR
+rst_n => delay_cnt[18].ACLR
+rst_n => delay_cnt[19].ACLR
+rst_n => press~reg0.ACLR
+rst_n => key_r1.PRESET
+rst_n => key_r0.PRESET
+rst_n => delay_flag.ACLR
+key => key_r0.DATAIN
+press <= press~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
