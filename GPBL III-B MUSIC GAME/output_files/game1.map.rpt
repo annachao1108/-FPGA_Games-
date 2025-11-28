@@ -1,0 +1,670 @@
+Analysis & Synthesis report for game1
+Mon Nov 24 18:44:27 2025
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. General Register Statistics
+ 10. Inverted Register Statistics
+ 11. Source assignments for song:song_inst|altsyncram:altsyncram_component|altsyncram_ltc1:auto_generated
+ 12. Source assignments for sound:sound_inst|altsyncram:altsyncram_component|altsyncram_3vc1:auto_generated
+ 13. Source assignments for music_delay:music_delay|altshift_taps:music_delay_r_rtl_0|shift_taps_9jm:auto_generated|altsyncram_v0b1:altsyncram2
+ 14. Parameter Settings for User Entity Instance: song:song_inst|altsyncram:altsyncram_component
+ 15. Parameter Settings for User Entity Instance: sound:sound_inst|altsyncram:altsyncram_component
+ 16. Parameter Settings for User Entity Instance: Player_hit:Player_hit1
+ 17. Parameter Settings for Inferred Entity Instance: music_delay:music_delay|altshift_taps:music_delay_r_rtl_0
+ 18. altsyncram Parameter Settings by Entity Instance
+ 19. altshift_taps Parameter Settings by Entity Instance
+ 20. Port Connectivity Checks: "sound:sound_inst"
+ 21. Port Connectivity Checks: "song:song_inst"
+ 22. Analysis & Synthesis Messages
+ 23. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                      ;
++------------------------------------+----------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Mon Nov 24 18:44:26 2025        ;
+; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
+; Revision Name                      ; game1                                        ;
+; Top-level Entity Name              ; game1                                        ;
+; Family                             ; Cyclone III                                  ;
+; Total logic elements               ; 190                                          ;
+;     Total combinational functions  ; 164                                          ;
+;     Dedicated logic registers      ; 121                                          ;
+; Total registers                    ; 121                                          ;
+; Total pins                         ; 58                                           ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 2,128                                        ;
+; Embedded Multiplier 9-bit elements ; 0                                            ;
+; Total PLLs                         ; 0                                            ;
++------------------------------------+----------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP3C16F484C6       ;                    ;
+; Top-level entity name                                                      ; game1              ; game1              ;
+; Family name                                                                ; Cyclone III        ; Stratix II         ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Show Parameter Settings Tables in Synthesis Report                         ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 16     ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                               ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                                                     ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+; game1/_7_seg.v                   ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/_7_seg.v         ;
+; game1/game1.v                    ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/game1.v          ;
+; game1/tick_gen.v                 ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/tick_gen.v       ;
+; game1/LED_shifter.v              ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/LED_shifter.v    ;
+; game1/Player_hit.v               ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/Player_hit.v     ;
+; game1/points_save.v              ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/points_save.v    ;
+; game1/length_ctrl.v              ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/length_ctrl.v    ;
+; game1/addr_gen.v                 ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/addr_gen.v       ;
+; game1/length_decoder.v           ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/length_decoder.v ;
+; game1/LED_shifter_g.v            ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/LED_shifter_g.v  ;
+; game1/music_delay.v              ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/music_delay.v    ;
+; game1/output_rst.v               ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/output_rst.v     ;
+; game1/music_freq.v               ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/music_freq.v     ;
+; game1/song.v                     ; yes             ; User Wizard-Generated File   ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/song.v           ;
+; game1/sound.v                    ; yes             ; User Wizard-Generated File   ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/game1/sound.v          ;
+; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/altsyncram.tdf                                                                   ;
+; db/altsyncram_ltc1.tdf           ; yes             ; Auto-Generated Megafunction  ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/db/altsyncram_ltc1.tdf ;
+; db/altsyncram_3vc1.tdf           ; yes             ; Auto-Generated Megafunction  ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/db/altsyncram_3vc1.tdf ;
+; altshift_taps.tdf                ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/altshift_taps.tdf                                                                ;
+; db/shift_taps_9jm.tdf            ; yes             ; Auto-Generated Megafunction  ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/db/shift_taps_9jm.tdf  ;
+; db/altsyncram_v0b1.tdf           ; yes             ; Auto-Generated Megafunction  ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/db/altsyncram_v0b1.tdf ;
+; db/cntr_jpf.tdf                  ; yes             ; Auto-Generated Megafunction  ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/db/cntr_jpf.tdf        ;
+; db/cntr_a9h.tdf                  ; yes             ; Auto-Generated Megafunction  ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/db/cntr_a9h.tdf        ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 190       ;
+;                                             ;           ;
+; Total combinational functions               ; 164       ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 62        ;
+;     -- 3 input functions                    ; 15        ;
+;     -- <=2 input functions                  ; 87        ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 90        ;
+;     -- arithmetic mode                      ; 74        ;
+;                                             ;           ;
+; Total registers                             ; 121       ;
+;     -- Dedicated logic registers            ; 121       ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 58        ;
+; Total memory bits                           ; 2128      ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 102       ;
+; Total fan-out                               ; 1304      ;
+; Average fan-out                             ; 2.92      ;
++---------------------------------------------+-----------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                               ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                        ; Library Name ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------+--------------+
+; |game1                                    ; 164 (6)           ; 121 (0)      ; 2128        ; 0            ; 0       ; 0         ; 58   ; 0            ; |game1                                                                                                                     ; work         ;
+;    |LED_shifter:LED_shifter1|             ; 0 (0)             ; 18 (18)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|LED_shifter:LED_shifter1                                                                                            ;              ;
+;    |LED_shifter_g:LED_shifter_g1|         ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|LED_shifter_g:LED_shifter_g1                                                                                        ;              ;
+;    |Player_hit:Player_hit1|               ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|Player_hit:Player_hit1                                                                                              ;              ;
+;    |_7_seg:_7seg0|                        ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|_7_seg:_7seg0                                                                                                       ;              ;
+;    |_7_seg:_7seg1|                        ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|_7_seg:_7seg1                                                                                                       ;              ;
+;    |_7_seg:_7seg2|                        ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|_7_seg:_7seg2                                                                                                       ;              ;
+;    |addr_gen:addr_gen1|                   ; 7 (7)             ; 7 (7)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|addr_gen:addr_gen1                                                                                                  ;              ;
+;    |length_ctrl:length_ctrl1|             ; 10 (10)           ; 5 (5)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|length_ctrl:length_ctrl1                                                                                            ;              ;
+;    |music_delay:music_delay|              ; 10 (0)            ; 10 (0)       ; 80          ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|music_delay:music_delay                                                                                             ;              ;
+;       |altshift_taps:music_delay_r_rtl_0| ; 10 (0)            ; 10 (0)       ; 80          ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|music_delay:music_delay|altshift_taps:music_delay_r_rtl_0                                                           ;              ;
+;          |shift_taps_9jm:auto_generated|  ; 10 (0)            ; 10 (1)       ; 80          ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|music_delay:music_delay|altshift_taps:music_delay_r_rtl_0|shift_taps_9jm:auto_generated                             ;              ;
+;             |altsyncram_v0b1:altsyncram2| ; 0 (0)             ; 0 (0)        ; 80          ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|music_delay:music_delay|altshift_taps:music_delay_r_rtl_0|shift_taps_9jm:auto_generated|altsyncram_v0b1:altsyncram2 ;              ;
+;             |cntr_a9h:cntr3|              ; 6 (6)             ; 5 (5)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|music_delay:music_delay|altshift_taps:music_delay_r_rtl_0|shift_taps_9jm:auto_generated|cntr_a9h:cntr3              ;              ;
+;             |cntr_jpf:cntr1|              ; 4 (4)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|music_delay:music_delay|altshift_taps:music_delay_r_rtl_0|shift_taps_9jm:auto_generated|cntr_jpf:cntr1              ;              ;
+;    |music_freq:music_freq1|               ; 54 (54)           ; 33 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|music_freq:music_freq1                                                                                              ;              ;
+;    |output_rst:output_rst1|               ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|output_rst:output_rst1                                                                                              ;              ;
+;    |points_save:points_save1|             ; 12 (12)           ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|points_save:points_save1                                                                                            ;              ;
+;    |song:song_inst|                       ; 0 (0)             ; 0 (0)        ; 1024        ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|song:song_inst                                                                                                      ;              ;
+;       |altsyncram:altsyncram_component|   ; 0 (0)             ; 0 (0)        ; 1024        ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|song:song_inst|altsyncram:altsyncram_component                                                                      ;              ;
+;          |altsyncram_ltc1:auto_generated| ; 0 (0)             ; 0 (0)        ; 1024        ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|song:song_inst|altsyncram:altsyncram_component|altsyncram_ltc1:auto_generated                                       ;              ;
+;    |sound:sound_inst|                     ; 0 (0)             ; 0 (0)        ; 1024        ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|sound:sound_inst                                                                                                    ;              ;
+;       |altsyncram:altsyncram_component|   ; 0 (0)             ; 0 (0)        ; 1024        ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|sound:sound_inst|altsyncram:altsyncram_component                                                                    ;              ;
+;          |altsyncram_3vc1:auto_generated| ; 0 (0)             ; 0 (0)        ; 1024        ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|sound:sound_inst|altsyncram:altsyncram_component|altsyncram_3vc1:auto_generated                                     ;              ;
+;    |tick_gen:tick_gen1|                   ; 40 (40)           ; 27 (27)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |game1|tick_gen:tick_gen1                                                                                                  ;              ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                         ;
++--------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------------+
+; Name                                                                                                                           ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF        ;
++--------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------------+
+; music_delay:music_delay|altshift_taps:music_delay_r_rtl_0|shift_taps_9jm:auto_generated|altsyncram_v0b1:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 16           ; 5            ; 16           ; 5            ; 80   ; None       ;
+; song:song_inst|altsyncram:altsyncram_component|altsyncram_ltc1:auto_generated|ALTSYNCRAM                                       ; AUTO ; Single Port      ; 128          ; 8            ; --           ; --           ; 1024 ; music.mif  ;
+; sound:sound_inst|altsyncram:altsyncram_component|altsyncram_3vc1:auto_generated|ALTSYNCRAM                                     ; AUTO ; Single Port      ; 32           ; 32           ; --           ; --           ; 1024 ; sound1.mif ;
++--------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 121   ;
+; Number of registers using Synchronous Clear  ; 32    ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 116   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 20    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------------------------------------------------------------+
+; Inverted Register Statistics                                                                            ;
++-----------------------------------------------------------------------------------------------+---------+
+; Inverted Register                                                                             ; Fan out ;
++-----------------------------------------------------------------------------------------------+---------+
+; music_delay:music_delay|altshift_taps:music_delay_r_rtl_0|shift_taps_9jm:auto_generated|dffe4 ; 5       ;
+; Total number of inverted registers = 1                                                        ;         ;
++-----------------------------------------------------------------------------------------------+---------+
+
+
++------------------------------------------------------------------------------------------------------+
+; Source assignments for song:song_inst|altsyncram:altsyncram_component|altsyncram_ltc1:auto_generated ;
++---------------------------------+--------------------+------+----------------------------------------+
+; Assignment                      ; Value              ; From ; To                                     ;
++---------------------------------+--------------------+------+----------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                      ;
++---------------------------------+--------------------+------+----------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------+
+; Source assignments for sound:sound_inst|altsyncram:altsyncram_component|altsyncram_3vc1:auto_generated ;
++---------------------------------+--------------------+------+------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                       ;
++---------------------------------+--------------------+------+------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                        ;
++---------------------------------+--------------------+------+------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for music_delay:music_delay|altshift_taps:music_delay_r_rtl_0|shift_taps_9jm:auto_generated|altsyncram_v0b1:altsyncram2 ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                           ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                            ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: song:song_inst|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+---------------------------------+
+; Parameter Name                     ; Value                ; Type                            ;
++------------------------------------+----------------------+---------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                         ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                      ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                    ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                    ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                  ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                         ;
+; OPERATION_MODE                     ; SINGLE_PORT          ; Untyped                         ;
+; WIDTH_A                            ; 8                    ; Signed Integer                  ;
+; WIDTHAD_A                          ; 7                    ; Signed Integer                  ;
+; NUMWORDS_A                         ; 128                  ; Signed Integer                  ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                         ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                         ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                         ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                         ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                         ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                         ;
+; WIDTH_B                            ; 1                    ; Untyped                         ;
+; WIDTHAD_B                          ; 1                    ; Untyped                         ;
+; NUMWORDS_B                         ; 1                    ; Untyped                         ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                         ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                         ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                         ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                         ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                         ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                         ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                         ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                         ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                         ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                         ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                         ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                         ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                  ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                         ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                         ;
+; BYTE_SIZE                          ; 8                    ; Untyped                         ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                         ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                         ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                         ;
+; INIT_FILE                          ; music.mif            ; Untyped                         ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                         ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                         ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                         ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                         ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                         ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                         ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                         ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                         ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                         ;
+; DEVICE_FAMILY                      ; Cyclone III          ; Untyped                         ;
+; CBXI_PARAMETER                     ; altsyncram_ltc1      ; Untyped                         ;
++------------------------------------+----------------------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sound:sound_inst|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+-----------------------------------+
+; Parameter Name                     ; Value                ; Type                              ;
++------------------------------------+----------------------+-----------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                           ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                        ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                      ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                      ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                    ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                           ;
+; OPERATION_MODE                     ; SINGLE_PORT          ; Untyped                           ;
+; WIDTH_A                            ; 32                   ; Signed Integer                    ;
+; WIDTHAD_A                          ; 5                    ; Signed Integer                    ;
+; NUMWORDS_A                         ; 32                   ; Signed Integer                    ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                           ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                           ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                           ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                           ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                           ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                           ;
+; WIDTH_B                            ; 1                    ; Untyped                           ;
+; WIDTHAD_B                          ; 1                    ; Untyped                           ;
+; NUMWORDS_B                         ; 1                    ; Untyped                           ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                           ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                           ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                           ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                           ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                           ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                           ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                           ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                           ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                           ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                           ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                           ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                           ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                    ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                           ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                           ;
+; BYTE_SIZE                          ; 8                    ; Untyped                           ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                           ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                           ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                           ;
+; INIT_FILE                          ; sound1.mif           ; Untyped                           ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                           ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                           ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                           ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                           ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                           ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                           ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                           ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                           ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                           ;
+; DEVICE_FAMILY                      ; Cyclone III          ; Untyped                           ;
+; CBXI_PARAMETER                     ; altsyncram_3vc1      ; Untyped                           ;
++------------------------------------+----------------------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Player_hit:Player_hit1 ;
++----------------+-------+--------------------------------------------+
+; Parameter Name ; Value ; Type                                       ;
++----------------+-------+--------------------------------------------+
+; time_          ; 20    ; Signed Integer                             ;
++----------------+-------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: music_delay:music_delay|altshift_taps:music_delay_r_rtl_0 ;
++----------------+----------------+--------------------------------------------------------------------------+
+; Parameter Name ; Value          ; Type                                                                     ;
++----------------+----------------+--------------------------------------------------------------------------+
+; WIDTH_BYTEENA  ; 1              ; Untyped                                                                  ;
+; NUMBER_OF_TAPS ; 1              ; Untyped                                                                  ;
+; TAP_DISTANCE   ; 18             ; Untyped                                                                  ;
+; WIDTH          ; 5              ; Untyped                                                                  ;
+; POWER_UP_STATE ; CLEARED        ; Untyped                                                                  ;
+; CBXI_PARAMETER ; shift_taps_9jm ; Untyped                                                                  ;
++----------------+----------------+--------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                             ;
++-------------------------------------------+--------------------------------------------------+
+; Name                                      ; Value                                            ;
++-------------------------------------------+--------------------------------------------------+
+; Number of entity instances                ; 2                                                ;
+; Entity Instance                           ; song:song_inst|altsyncram:altsyncram_component   ;
+;     -- OPERATION_MODE                     ; SINGLE_PORT                                      ;
+;     -- WIDTH_A                            ; 8                                                ;
+;     -- NUMWORDS_A                         ; 128                                              ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                     ;
+;     -- WIDTH_B                            ; 1                                                ;
+;     -- NUMWORDS_B                         ; 1                                                ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                           ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                     ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                             ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                        ;
+; Entity Instance                           ; sound:sound_inst|altsyncram:altsyncram_component ;
+;     -- OPERATION_MODE                     ; SINGLE_PORT                                      ;
+;     -- WIDTH_A                            ; 32                                               ;
+;     -- NUMWORDS_A                         ; 32                                               ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                     ;
+;     -- WIDTH_B                            ; 1                                                ;
+;     -- NUMWORDS_B                         ; 1                                                ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                           ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                     ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                             ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                        ;
++-------------------------------------------+--------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------+
+; altshift_taps Parameter Settings by Entity Instance                                    ;
++----------------------------+-----------------------------------------------------------+
+; Name                       ; Value                                                     ;
++----------------------------+-----------------------------------------------------------+
+; Number of entity instances ; 1                                                         ;
+; Entity Instance            ; music_delay:music_delay|altshift_taps:music_delay_r_rtl_0 ;
+;     -- NUMBER_OF_TAPS      ; 1                                                         ;
+;     -- TAP_DISTANCE        ; 18                                                        ;
+;     -- WIDTH               ; 5                                                         ;
++----------------------------+-----------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "sound:sound_inst"                                                                                                                                                                     ;
++----------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port     ; Type  ; Severity ; Details                                                                                                                                                                            ;
++----------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; data     ; Input ; Info     ; Stuck at GND                                                                                                                                                                       ;
+; wren     ; Input ; Warning  ; Input port expression (32 bits) is wider than the input port (1 bits) it drives.  The 31 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; wren[-1] ; Input ; Info     ; Stuck at GND                                                                                                                                                                       ;
++----------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "song:song_inst"                                                                                                                                                                         ;
++------------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port       ; Type  ; Severity ; Details                                                                                                                                                                            ;
++------------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; data       ; Input ; Warning  ; Input port expression (32 bits) is wider than the input port (8 bits) it drives.  The 24 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; data[7..0] ; Input ; Info     ; Stuck at GND                                                                                                                                                                       ;
+; wren       ; Input ; Info     ; Stuck at GND                                                                                                                                                                       ;
++------------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+    Info: Processing started: Mon Nov 24 18:43:48 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off game1 -c game1
+Info: Found 1 design units, including 1 entities, in source file game1/_7_seg.v
+    Info: Found entity 1: _7_seg
+Warning: Can't analyze file -- file test/div2_24.v is missing
+Info: Found 1 design units, including 1 entities, in source file game1/game1.v
+    Info: Found entity 1: game1
+Info: Found 1 design units, including 1 entities, in source file game1/tick_gen.v
+    Info: Found entity 1: tick_gen
+Info: Found 1 design units, including 1 entities, in source file game1/led_shifter.v
+    Info: Found entity 1: LED_shifter
+Info: Found 1 design units, including 1 entities, in source file game1/player_hit.v
+    Info: Found entity 1: Player_hit
+Info: Found 1 design units, including 1 entities, in source file game1/points_save.v
+    Info: Found entity 1: points_save
+Info: Found 1 design units, including 1 entities, in source file game1/length_ctrl.v
+    Info: Found entity 1: length_ctrl
+Info: Found 1 design units, including 1 entities, in source file game1/addr_gen.v
+    Info: Found entity 1: addr_gen
+Info: Found 1 design units, including 1 entities, in source file game1/length_decoder.v
+    Info: Found entity 1: length_decoder
+Info: Found 1 design units, including 1 entities, in source file game1/led_shifter_g.v
+    Info: Found entity 1: LED_shifter_g
+Info: Found 1 design units, including 1 entities, in source file game1/music_delay.v
+    Info: Found entity 1: music_delay
+Info: Found 1 design units, including 1 entities, in source file game1/output_rst.v
+    Info: Found entity 1: output_rst
+Info: Found 1 design units, including 1 entities, in source file game1/music_freq.v
+    Info: Found entity 1: music_freq
+Info: Found 1 design units, including 1 entities, in source file game1/song.v
+    Info: Found entity 1: song
+Info: Found 1 design units, including 1 entities, in source file game1/sound.v
+    Info: Found entity 1: sound
+Info: Elaborating entity "game1" for the top level hierarchy
+Info: Elaborating entity "song" for hierarchy "song:song_inst"
+Info: Elaborating entity "altsyncram" for hierarchy "song:song_inst|altsyncram:altsyncram_component"
+Info: Elaborated megafunction instantiation "song:song_inst|altsyncram:altsyncram_component"
+Info: Instantiated megafunction "song:song_inst|altsyncram:altsyncram_component" with the following parameter:
+    Info: Parameter "clock_enable_input_a" = "BYPASS"
+    Info: Parameter "clock_enable_output_a" = "BYPASS"
+    Info: Parameter "init_file" = "music.mif"
+    Info: Parameter "intended_device_family" = "Cyclone II"
+    Info: Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info: Parameter "lpm_type" = "altsyncram"
+    Info: Parameter "numwords_a" = "128"
+    Info: Parameter "operation_mode" = "SINGLE_PORT"
+    Info: Parameter "outdata_aclr_a" = "NONE"
+    Info: Parameter "outdata_reg_a" = "UNREGISTERED"
+    Info: Parameter "power_up_uninitialized" = "FALSE"
+    Info: Parameter "widthad_a" = "7"
+    Info: Parameter "width_a" = "8"
+    Info: Parameter "width_byteena_a" = "1"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_ltc1.tdf
+    Info: Found entity 1: altsyncram_ltc1
+Info: Elaborating entity "altsyncram_ltc1" for hierarchy "song:song_inst|altsyncram:altsyncram_component|altsyncram_ltc1:auto_generated"
+Info: Elaborating entity "sound" for hierarchy "sound:sound_inst"
+Info: Elaborating entity "altsyncram" for hierarchy "sound:sound_inst|altsyncram:altsyncram_component"
+Info: Elaborated megafunction instantiation "sound:sound_inst|altsyncram:altsyncram_component"
+Info: Instantiated megafunction "sound:sound_inst|altsyncram:altsyncram_component" with the following parameter:
+    Info: Parameter "clock_enable_input_a" = "BYPASS"
+    Info: Parameter "clock_enable_output_a" = "BYPASS"
+    Info: Parameter "init_file" = "sound1.mif"
+    Info: Parameter "intended_device_family" = "Cyclone II"
+    Info: Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info: Parameter "lpm_type" = "altsyncram"
+    Info: Parameter "numwords_a" = "32"
+    Info: Parameter "operation_mode" = "SINGLE_PORT"
+    Info: Parameter "outdata_aclr_a" = "NONE"
+    Info: Parameter "outdata_reg_a" = "UNREGISTERED"
+    Info: Parameter "power_up_uninitialized" = "FALSE"
+    Info: Parameter "widthad_a" = "5"
+    Info: Parameter "width_a" = "32"
+    Info: Parameter "width_byteena_a" = "1"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_3vc1.tdf
+    Info: Found entity 1: altsyncram_3vc1
+Info: Elaborating entity "altsyncram_3vc1" for hierarchy "sound:sound_inst|altsyncram:altsyncram_component|altsyncram_3vc1:auto_generated"
+Info: Elaborating entity "output_rst" for hierarchy "output_rst:output_rst1"
+Info: Elaborating entity "music_freq" for hierarchy "music_freq:music_freq1"
+Info: Elaborating entity "music_delay" for hierarchy "music_delay:music_delay"
+Info: Elaborating entity "addr_gen" for hierarchy "addr_gen:addr_gen1"
+Info: Elaborating entity "tick_gen" for hierarchy "tick_gen:tick_gen1"
+Warning (10230): Verilog HDL assignment warning at tick_gen.v(23): truncated value with size 32 to match size of target (20)
+Warning (10230): Verilog HDL assignment warning at tick_gen.v(24): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at tick_gen.v(27): truncated value with size 32 to match size of target (1)
+Info: Elaborating entity "LED_shifter" for hierarchy "LED_shifter:LED_shifter1"
+Info: Elaborating entity "LED_shifter_g" for hierarchy "LED_shifter_g:LED_shifter_g1"
+Info: Elaborating entity "Player_hit" for hierarchy "Player_hit:Player_hit1"
+Info: Elaborating entity "points_save" for hierarchy "points_save:points_save1"
+Info: Elaborating entity "length_decoder" for hierarchy "length_decoder:length_decoder1"
+Info: Elaborating entity "length_ctrl" for hierarchy "length_ctrl:length_ctrl1"
+Warning (10230): Verilog HDL assignment warning at length_ctrl.v(19): truncated value with size 32 to match size of target (4)
+Info: Elaborating entity "_7_seg" for hierarchy "_7_seg:_7seg0"
+Info: Inferred 1 megafunctions from design logic
+    Info: Inferred altshift_taps megafunction from the following design logic: "music_delay:music_delay|music_delay_r[85]~0"
+        Info: Parameter NUMBER_OF_TAPS set to 1
+        Info: Parameter TAP_DISTANCE set to 18
+        Info: Parameter WIDTH set to 5
+Info: Elaborated megafunction instantiation "music_delay:music_delay|altshift_taps:music_delay_r_rtl_0"
+Info: Instantiated megafunction "music_delay:music_delay|altshift_taps:music_delay_r_rtl_0" with the following parameter:
+    Info: Parameter "NUMBER_OF_TAPS" = "1"
+    Info: Parameter "TAP_DISTANCE" = "18"
+    Info: Parameter "WIDTH" = "5"
+Info: Found 1 design units, including 1 entities, in source file db/shift_taps_9jm.tdf
+    Info: Found entity 1: shift_taps_9jm
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_v0b1.tdf
+    Info: Found entity 1: altsyncram_v0b1
+Info: Found 1 design units, including 1 entities, in source file db/cntr_jpf.tdf
+    Info: Found entity 1: cntr_jpf
+Info: Found 1 design units, including 1 entities, in source file db/cntr_a9h.tdf
+    Info: Found entity 1: cntr_a9h
+Warning: 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info: Registers with preset signals will power-up high
+Info: DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Info: Timing-Driven Synthesis is running
+Info: Generated suppressed messages file Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/output_files/game1.map.smsg
+Info: Implemented 295 device resources after synthesis - the final resource count might be different
+    Info: Implemented 9 input pins
+    Info: Implemented 49 output pins
+    Info: Implemented 192 logic cells
+    Info: Implemented 45 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 6 warnings
+    Info: Peak virtual memory: 241 megabytes
+    Info: Processing ended: Mon Nov 24 18:44:28 2025
+    Info: Elapsed time: 00:00:40
+    Info: Total CPU time (on all processors): 00:00:04
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/音樂撥放/CS255A-20 MUSIC GAME/FinalProject - MUSIC GAME/temp/temp/output_files/game1.map.smsg.
+
+
