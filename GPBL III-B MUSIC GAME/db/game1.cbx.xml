@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="game1">
+		<CBX_INST_ENTRY INSTANCE_NAME="|game1|music_delay:music_delay|altshift_taps:music_delay_r_rtl_0" CBX_FILE_NAME="shift_taps_9jm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|game1|song:song_inst|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_ltc1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|game1|sound:sound_inst|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_3vc1.tdf"/>
+	</PROJECT>
+</LOG_ROOT>
