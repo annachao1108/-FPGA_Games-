@@ -1,0 +1,1099 @@
+Analysis & Synthesis report for FinalProject
+Mon Nov 24 20:08:31 2025
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Registers Removed During Synthesis
+  9. General Register Statistics
+ 10. Inverted Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Parameter Settings for User Entity Instance: Top-level Entity: |FinalProject
+ 13. Parameter Settings for User Entity Instance: divn:u0
+ 14. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0
+ 15. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod2
+ 16. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod1
+ 17. Analysis & Synthesis Messages
+ 18. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                      ;
++------------------------------------+----------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Mon Nov 24 20:08:24 2025        ;
+; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
+; Revision Name                      ; FinalProject                                 ;
+; Top-level Entity Name              ; FinalProject                                 ;
+; Family                             ; Cyclone III                                  ;
+; Total logic elements               ; 9,748                                        ;
+;     Total combinational functions  ; 9,736                                        ;
+;     Dedicated logic registers      ; 868                                          ;
+; Total registers                    ; 868                                          ;
+; Total pins                         ; 252                                          ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 0                                            ;
+; Embedded Multiplier 9-bit elements ; 0                                            ;
+; Total PLLs                         ; 0                                            ;
++------------------------------------+----------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP3C16F484C6       ;                    ;
+; Top-level entity name                                                      ; FinalProject       ; FinalProject       ;
+; Family name                                                                ; Cyclone III        ; Stratix II         ;
+; Type of Retiming Performed During Resynthesis                              ; Full               ;                    ;
+; Resynthesis Optimization Effort                                            ; Normal             ;                    ;
+; Physical Synthesis Level for Resynthesis                                   ; Normal             ;                    ;
+; Use Generated Physical Constraints File                                    ; On                 ;                    ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Show Parameter Settings Tables in Synthesis Report                         ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 10     ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                             ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                                                   ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
+; FinalProject.v                   ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/SW+B+VGA_乒乓球Pong game+SNAKE+射擊/CS255B-1 SNAKE/FinalProject/FinalProject.v         ;
+; divn.v                           ; yes             ; User Verilog HDL File        ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/SW+B+VGA_乒乓球Pong game+SNAKE+射擊/CS255B-1 SNAKE/FinalProject/divn.v                 ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/lpm_divide.tdf                                                                 ;
+; db/lpm_divide_3po.tdf            ; yes             ; Auto-Generated Megafunction  ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/SW+B+VGA_乒乓球Pong game+SNAKE+射擊/CS255B-1 SNAKE/FinalProject/db/lpm_divide_3po.tdf  ;
+; db/abs_divider_4dg.tdf           ; yes             ; Auto-Generated Megafunction  ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/SW+B+VGA_乒乓球Pong game+SNAKE+射擊/CS255B-1 SNAKE/FinalProject/db/abs_divider_4dg.tdf ;
+; db/alt_u_div_t8f.tdf             ; yes             ; Auto-Generated Megafunction  ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/SW+B+VGA_乒乓球Pong game+SNAKE+射擊/CS255B-1 SNAKE/FinalProject/db/alt_u_div_t8f.tdf   ;
+; db/add_sub_unc.tdf               ; yes             ; Auto-Generated Megafunction  ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/SW+B+VGA_乒乓球Pong game+SNAKE+射擊/CS255B-1 SNAKE/FinalProject/db/add_sub_unc.tdf     ;
+; db/add_sub_vnc.tdf               ; yes             ; Auto-Generated Megafunction  ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/SW+B+VGA_乒乓球Pong game+SNAKE+射擊/CS255B-1 SNAKE/FinalProject/db/add_sub_vnc.tdf     ;
+; db/lpm_abs_9v9.tdf               ; yes             ; Auto-Generated Megafunction  ; Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/SW+B+VGA_乒乓球Pong game+SNAKE+射擊/CS255B-1 SNAKE/FinalProject/db/lpm_abs_9v9.tdf     ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary              ;
++---------------------------------------------+------------+
+; Resource                                    ; Usage      ;
++---------------------------------------------+------------+
+; Estimated Total logic elements              ; 9,748      ;
+;                                             ;            ;
+; Total combinational functions               ; 9736       ;
+; Logic element usage by number of LUT inputs ;            ;
+;     -- 4 input functions                    ; 3742       ;
+;     -- 3 input functions                    ; 3984       ;
+;     -- <=2 input functions                  ; 2010       ;
+;                                             ;            ;
+; Logic elements by mode                      ;            ;
+;     -- normal mode                          ; 7605       ;
+;     -- arithmetic mode                      ; 2131       ;
+;                                             ;            ;
+; Total registers                             ; 868        ;
+;     -- Dedicated logic registers            ; 868        ;
+;     -- I/O registers                        ; 0          ;
+;                                             ;            ;
+; I/O pins                                    ; 252        ;
+; Maximum fan-out node                        ; apple1y~13 ;
+; Maximum fan-out                             ; 1121       ;
+; Total fan-out                               ; 33987      ;
+; Average fan-out                             ; 3.03       ;
++---------------------------------------------+------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                           ;
++---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node            ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                        ; Library Name ;
++---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------+--------------+
+; |FinalProject                         ; 9736 (7161)       ; 868 (841)    ; 0           ; 0            ; 0       ; 0         ; 252  ; 0            ; |FinalProject                                                                                              ; work         ;
+;    |divn:u0|                          ; 36 (36)           ; 27 (27)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|divn:u0                                                                                      ;              ;
+;    |lpm_divide:Mod0|                  ; 723 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod0                                                                              ;              ;
+;       |lpm_divide_3po:auto_generated| ; 723 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod0|lpm_divide_3po:auto_generated                                                ;              ;
+;          |abs_divider_4dg:divider|    ; 723 (32)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod0|lpm_divide_3po:auto_generated|abs_divider_4dg:divider                        ;              ;
+;             |alt_u_div_t8f:divider|   ; 659 (659)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod0|lpm_divide_3po:auto_generated|abs_divider_4dg:divider|alt_u_div_t8f:divider  ;              ;
+;             |lpm_abs_9v9:my_abs_num|  ; 32 (32)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod0|lpm_divide_3po:auto_generated|abs_divider_4dg:divider|lpm_abs_9v9:my_abs_num ;              ;
+;    |lpm_divide:Mod1|                  ; 951 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod1                                                                              ;              ;
+;       |lpm_divide_3po:auto_generated| ; 951 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod1|lpm_divide_3po:auto_generated                                                ;              ;
+;          |abs_divider_4dg:divider|    ; 951 (32)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod1|lpm_divide_3po:auto_generated|abs_divider_4dg:divider                        ;              ;
+;             |alt_u_div_t8f:divider|   ; 888 (888)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod1|lpm_divide_3po:auto_generated|abs_divider_4dg:divider|alt_u_div_t8f:divider  ;              ;
+;             |lpm_abs_9v9:my_abs_num|  ; 31 (31)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod1|lpm_divide_3po:auto_generated|abs_divider_4dg:divider|lpm_abs_9v9:my_abs_num ;              ;
+;    |lpm_divide:Mod2|                  ; 865 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod2                                                                              ;              ;
+;       |lpm_divide_3po:auto_generated| ; 865 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod2|lpm_divide_3po:auto_generated                                                ;              ;
+;          |abs_divider_4dg:divider|    ; 865 (32)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod2|lpm_divide_3po:auto_generated|abs_divider_4dg:divider                        ;              ;
+;             |alt_u_div_t8f:divider|   ; 800 (800)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod2|lpm_divide_3po:auto_generated|abs_divider_4dg:divider|alt_u_div_t8f:divider  ;              ;
+;             |lpm_abs_9v9:my_abs_num|  ; 33 (33)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FinalProject|lpm_divide:Mod2|lpm_divide_3po:auto_generated|abs_divider_4dg:divider|lpm_abs_9v9:my_abs_num ;              ;
++---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                               ;
++-----------------------------------------+----------------------------------------+
+; Register name                           ; Reason for Removal                     ;
++-----------------------------------------+----------------------------------------+
+; gamelock[2..30]                         ; Merged with gamelock[31]               ;
+; heady[0]                                ; Merged with headx[0]                   ;
+; state[1][29]                            ; Merged with state[1][31]               ;
+; state[1][27]                            ; Merged with state[1][31]               ;
+; state[1][25]                            ; Merged with state[1][31]               ;
+; state[1][23]                            ; Merged with state[1][31]               ;
+; state[1][21]                            ; Merged with state[1][31]               ;
+; state[1][17]                            ; Merged with state[1][31]               ;
+; state[1][15]                            ; Merged with state[1][31]               ;
+; state[1][13]                            ; Merged with state[1][31]               ;
+; state[1][11]                            ; Merged with state[1][31]               ;
+; state[1][9]                             ; Merged with state[1][31]               ;
+; state[1][7]                             ; Merged with state[1][31]               ;
+; state[1][5]                             ; Merged with state[1][31]               ;
+; state[1][26]                            ; Merged with state[1][30]               ;
+; state[1][18]                            ; Merged with state[1][30]               ;
+; state[1][10]                            ; Merged with state[1][30]               ;
+; state[1][2]                             ; Merged with state[1][30]               ;
+; state[1][22]                            ; Merged with state[1][30]               ;
+; state[1][14]                            ; Merged with state[1][30]               ;
+; state[1][6]                             ; Merged with state[1][30]               ;
+; state[1][3]                             ; Merged with state[1][30]               ;
+; state[1][24]                            ; Merged with state[1][28]               ;
+; state[1][20]                            ; Merged with state[1][28]               ;
+; state[1][19]                            ; Merged with state[1][28]               ;
+; state[1][16]                            ; Merged with state[1][28]               ;
+; state[1][12]                            ; Merged with state[1][28]               ;
+; state[1][8]                             ; Merged with state[1][28]               ;
+; state[1][4]                             ; Merged with state[1][28]               ;
+; state[1][1]                             ; Merged with state[1][28]               ;
+; state[2][29]                            ; Merged with state[2][31]               ;
+; state[2][27]                            ; Merged with state[2][31]               ;
+; state[2][25]                            ; Merged with state[2][31]               ;
+; state[2][23]                            ; Merged with state[2][31]               ;
+; state[2][21]                            ; Merged with state[2][31]               ;
+; state[2][17]                            ; Merged with state[2][31]               ;
+; state[2][15]                            ; Merged with state[2][31]               ;
+; state[2][13]                            ; Merged with state[2][31]               ;
+; state[2][11]                            ; Merged with state[2][31]               ;
+; state[2][9]                             ; Merged with state[2][31]               ;
+; state[2][7]                             ; Merged with state[2][31]               ;
+; state[2][5]                             ; Merged with state[2][31]               ;
+; state[2][26]                            ; Merged with state[2][30]               ;
+; state[2][18]                            ; Merged with state[2][30]               ;
+; state[2][10]                            ; Merged with state[2][30]               ;
+; state[2][3]                             ; Merged with state[2][30]               ;
+; state[2][2]                             ; Merged with state[2][30]               ;
+; state[2][22]                            ; Merged with state[2][30]               ;
+; state[2][14]                            ; Merged with state[2][30]               ;
+; state[2][6]                             ; Merged with state[2][30]               ;
+; state[2][24]                            ; Merged with state[2][28]               ;
+; state[2][20]                            ; Merged with state[2][28]               ;
+; state[2][19]                            ; Merged with state[2][28]               ;
+; state[2][16]                            ; Merged with state[2][28]               ;
+; state[2][12]                            ; Merged with state[2][28]               ;
+; state[2][8]                             ; Merged with state[2][28]               ;
+; state[2][4]                             ; Merged with state[2][28]               ;
+; state[2][1]                             ; Merged with state[2][28]               ;
+; state[3][29]                            ; Merged with state[3][31]               ;
+; state[3][27]                            ; Merged with state[3][31]               ;
+; state[3][25]                            ; Merged with state[3][31]               ;
+; state[3][23]                            ; Merged with state[3][31]               ;
+; state[3][21]                            ; Merged with state[3][31]               ;
+; state[3][17]                            ; Merged with state[3][31]               ;
+; state[3][15]                            ; Merged with state[3][31]               ;
+; state[3][13]                            ; Merged with state[3][31]               ;
+; state[3][11]                            ; Merged with state[3][31]               ;
+; state[3][9]                             ; Merged with state[3][31]               ;
+; state[3][7]                             ; Merged with state[3][31]               ;
+; state[3][5]                             ; Merged with state[3][31]               ;
+; state[3][3]                             ; Merged with state[3][31]               ;
+; state[3][26]                            ; Merged with state[3][30]               ;
+; state[3][18]                            ; Merged with state[3][30]               ;
+; state[3][10]                            ; Merged with state[3][30]               ;
+; state[3][2]                             ; Merged with state[3][30]               ;
+; state[3][22]                            ; Merged with state[3][30]               ;
+; state[3][14]                            ; Merged with state[3][30]               ;
+; state[3][6]                             ; Merged with state[3][30]               ;
+; state[3][24]                            ; Merged with state[3][28]               ;
+; state[3][20]                            ; Merged with state[3][28]               ;
+; state[3][19]                            ; Merged with state[3][28]               ;
+; state[3][16]                            ; Merged with state[3][28]               ;
+; state[3][12]                            ; Merged with state[3][28]               ;
+; state[3][8]                             ; Merged with state[3][28]               ;
+; state[3][4]                             ; Merged with state[3][28]               ;
+; state[3][1]                             ; Merged with state[3][28]               ;
+; state[4][29]                            ; Merged with state[4][31]               ;
+; state[4][27]                            ; Merged with state[4][31]               ;
+; state[4][25]                            ; Merged with state[4][31]               ;
+; state[4][23]                            ; Merged with state[4][31]               ;
+; state[4][21]                            ; Merged with state[4][31]               ;
+; state[4][19]                            ; Merged with state[4][31]               ;
+; state[4][17]                            ; Merged with state[4][31]               ;
+; state[4][15]                            ; Merged with state[4][31]               ;
+; state[4][13]                            ; Merged with state[4][31]               ;
+; state[4][11]                            ; Merged with state[4][31]               ;
+; state[4][9]                             ; Merged with state[4][31]               ;
+; state[4][7]                             ; Merged with state[4][31]               ;
+; state[4][5]                             ; Merged with state[4][31]               ;
+; state[4][3]                             ; Merged with state[4][31]               ;
+; state[4][26]                            ; Merged with state[4][30]               ;
+; state[4][18]                            ; Merged with state[4][30]               ;
+; state[4][10]                            ; Merged with state[4][30]               ;
+; state[4][2]                             ; Merged with state[4][30]               ;
+; state[4][22]                            ; Merged with state[4][30]               ;
+; state[4][14]                            ; Merged with state[4][30]               ;
+; state[4][6]                             ; Merged with state[4][30]               ;
+; state[4][24]                            ; Merged with state[4][28]               ;
+; state[4][20]                            ; Merged with state[4][28]               ;
+; state[4][16]                            ; Merged with state[4][28]               ;
+; state[4][12]                            ; Merged with state[4][28]               ;
+; state[4][8]                             ; Merged with state[4][28]               ;
+; state[4][4]                             ; Merged with state[4][28]               ;
+; state[4][1]                             ; Merged with state[4][28]               ;
+; state[5][29]                            ; Merged with state[5][31]               ;
+; state[5][27]                            ; Merged with state[5][31]               ;
+; state[5][25]                            ; Merged with state[5][31]               ;
+; state[5][23]                            ; Merged with state[5][31]               ;
+; state[5][21]                            ; Merged with state[5][31]               ;
+; state[5][19]                            ; Merged with state[5][31]               ;
+; state[5][17]                            ; Merged with state[5][31]               ;
+; state[5][15]                            ; Merged with state[5][31]               ;
+; state[5][13]                            ; Merged with state[5][31]               ;
+; state[5][11]                            ; Merged with state[5][31]               ;
+; state[5][9]                             ; Merged with state[5][31]               ;
+; state[5][7]                             ; Merged with state[5][31]               ;
+; state[5][5]                             ; Merged with state[5][31]               ;
+; state[5][3]                             ; Merged with state[5][31]               ;
+; state[5][26]                            ; Merged with state[5][30]               ;
+; state[5][22]                            ; Merged with state[5][30]               ;
+; state[5][18]                            ; Merged with state[5][30]               ;
+; state[5][14]                            ; Merged with state[5][30]               ;
+; state[5][10]                            ; Merged with state[5][30]               ;
+; state[5][6]                             ; Merged with state[5][30]               ;
+; state[5][2]                             ; Merged with state[5][30]               ;
+; state[5][24]                            ; Merged with state[5][28]               ;
+; state[5][20]                            ; Merged with state[5][28]               ;
+; state[5][16]                            ; Merged with state[5][28]               ;
+; state[5][12]                            ; Merged with state[5][28]               ;
+; state[5][8]                             ; Merged with state[5][28]               ;
+; state[5][4]                             ; Merged with state[5][28]               ;
+; state[5][1]                             ; Merged with state[5][28]               ;
+; state[6][29]                            ; Merged with state[6][31]               ;
+; state[6][27]                            ; Merged with state[6][31]               ;
+; state[6][25]                            ; Merged with state[6][31]               ;
+; state[6][23]                            ; Merged with state[6][31]               ;
+; state[6][21]                            ; Merged with state[6][31]               ;
+; state[6][19]                            ; Merged with state[6][31]               ;
+; state[6][17]                            ; Merged with state[6][31]               ;
+; state[6][15]                            ; Merged with state[6][31]               ;
+; state[6][13]                            ; Merged with state[6][31]               ;
+; state[6][11]                            ; Merged with state[6][31]               ;
+; state[6][9]                             ; Merged with state[6][31]               ;
+; state[6][7]                             ; Merged with state[6][31]               ;
+; state[6][5]                             ; Merged with state[6][31]               ;
+; state[6][3]                             ; Merged with state[6][31]               ;
+; state[6][26]                            ; Merged with state[6][30]               ;
+; state[6][22]                            ; Merged with state[6][30]               ;
+; state[6][18]                            ; Merged with state[6][30]               ;
+; state[6][14]                            ; Merged with state[6][30]               ;
+; state[6][10]                            ; Merged with state[6][30]               ;
+; state[6][6]                             ; Merged with state[6][30]               ;
+; state[6][2]                             ; Merged with state[6][30]               ;
+; state[6][24]                            ; Merged with state[6][28]               ;
+; state[6][20]                            ; Merged with state[6][28]               ;
+; state[6][16]                            ; Merged with state[6][28]               ;
+; state[6][12]                            ; Merged with state[6][28]               ;
+; state[6][8]                             ; Merged with state[6][28]               ;
+; state[6][4]                             ; Merged with state[6][28]               ;
+; state[6][1]                             ; Merged with state[6][28]               ;
+; state[7][29]                            ; Merged with state[7][31]               ;
+; state[7][27]                            ; Merged with state[7][31]               ;
+; state[7][25]                            ; Merged with state[7][31]               ;
+; state[7][23]                            ; Merged with state[7][31]               ;
+; state[7][21]                            ; Merged with state[7][31]               ;
+; state[7][19]                            ; Merged with state[7][31]               ;
+; state[7][17]                            ; Merged with state[7][31]               ;
+; state[7][15]                            ; Merged with state[7][31]               ;
+; state[7][13]                            ; Merged with state[7][31]               ;
+; state[7][11]                            ; Merged with state[7][31]               ;
+; state[7][9]                             ; Merged with state[7][31]               ;
+; state[7][7]                             ; Merged with state[7][31]               ;
+; state[7][5]                             ; Merged with state[7][31]               ;
+; state[7][3]                             ; Merged with state[7][31]               ;
+; state[7][26]                            ; Merged with state[7][30]               ;
+; state[7][22]                            ; Merged with state[7][30]               ;
+; state[7][18]                            ; Merged with state[7][30]               ;
+; state[7][14]                            ; Merged with state[7][30]               ;
+; state[7][10]                            ; Merged with state[7][30]               ;
+; state[7][6]                             ; Merged with state[7][30]               ;
+; state[7][2]                             ; Merged with state[7][30]               ;
+; state[7][24]                            ; Merged with state[7][28]               ;
+; state[7][20]                            ; Merged with state[7][28]               ;
+; state[7][16]                            ; Merged with state[7][28]               ;
+; state[7][12]                            ; Merged with state[7][28]               ;
+; state[7][8]                             ; Merged with state[7][28]               ;
+; state[7][4]                             ; Merged with state[7][28]               ;
+; state[7][1]                             ; Merged with state[7][28]               ;
+; state[8][29]                            ; Merged with state[8][31]               ;
+; state[8][27]                            ; Merged with state[8][31]               ;
+; state[8][25]                            ; Merged with state[8][31]               ;
+; state[8][23]                            ; Merged with state[8][31]               ;
+; state[8][21]                            ; Merged with state[8][31]               ;
+; state[8][19]                            ; Merged with state[8][31]               ;
+; state[8][17]                            ; Merged with state[8][31]               ;
+; state[8][15]                            ; Merged with state[8][31]               ;
+; state[8][13]                            ; Merged with state[8][31]               ;
+; state[8][11]                            ; Merged with state[8][31]               ;
+; state[8][9]                             ; Merged with state[8][31]               ;
+; state[8][7]                             ; Merged with state[8][31]               ;
+; state[8][5]                             ; Merged with state[8][31]               ;
+; state[8][3]                             ; Merged with state[8][31]               ;
+; state[8][26]                            ; Merged with state[8][28]               ;
+; state[8][24]                            ; Merged with state[8][28]               ;
+; state[8][22]                            ; Merged with state[8][28]               ;
+; state[8][20]                            ; Merged with state[8][28]               ;
+; state[8][18]                            ; Merged with state[8][28]               ;
+; state[8][16]                            ; Merged with state[8][28]               ;
+; state[8][14]                            ; Merged with state[8][28]               ;
+; state[8][12]                            ; Merged with state[8][28]               ;
+; state[8][10]                            ; Merged with state[8][28]               ;
+; state[8][8]                             ; Merged with state[8][28]               ;
+; state[8][6]                             ; Merged with state[8][28]               ;
+; state[8][4]                             ; Merged with state[8][28]               ;
+; state[8][2]                             ; Merged with state[8][28]               ;
+; state[8][1]                             ; Merged with state[8][28]               ;
+; state[9][29]                            ; Merged with state[9][31]               ;
+; state[9][27]                            ; Merged with state[9][31]               ;
+; state[9][25]                            ; Merged with state[9][31]               ;
+; state[9][23]                            ; Merged with state[9][31]               ;
+; state[9][21]                            ; Merged with state[9][31]               ;
+; state[9][19]                            ; Merged with state[9][31]               ;
+; state[9][17]                            ; Merged with state[9][31]               ;
+; state[9][15]                            ; Merged with state[9][31]               ;
+; state[9][13]                            ; Merged with state[9][31]               ;
+; state[9][11]                            ; Merged with state[9][31]               ;
+; state[9][1]                             ; Merged with state[9][31]               ;
+; state[9][9]                             ; Merged with state[9][31]               ;
+; state[9][7]                             ; Merged with state[9][31]               ;
+; state[9][5]                             ; Merged with state[9][31]               ;
+; state[9][28]                            ; Merged with state[9][30]               ;
+; state[9][26]                            ; Merged with state[9][30]               ;
+; state[9][24]                            ; Merged with state[9][30]               ;
+; state[9][22]                            ; Merged with state[9][30]               ;
+; state[9][20]                            ; Merged with state[9][30]               ;
+; state[9][18]                            ; Merged with state[9][30]               ;
+; state[9][16]                            ; Merged with state[9][30]               ;
+; state[9][14]                            ; Merged with state[9][30]               ;
+; state[9][10]                            ; Merged with state[9][12]               ;
+; state[9][8]                             ; Merged with state[9][12]               ;
+; state[9][6]                             ; Merged with state[9][12]               ;
+; state[9][4]                             ; Merged with state[9][12]               ;
+; state[9][2]                             ; Merged with state[9][3]                ;
+; b[8..30]                                ; Merged with b[31]                      ;
+; b[4..6]                                 ; Merged with b[7]                       ;
+; s0[23,25,27,29]                         ; Merged with s0[31]                     ;
+; s0[3,7,22]                              ; Merged with s0[30]                     ;
+; s0[0,8,17,24]                           ; Merged with s0[28]                     ;
+; s0[2,18]                                ; Merged with s0[26]                     ;
+; s0[4..5,12..13,16,19]                   ; Merged with s0[21]                     ;
+; s0[6,11]                                ; Merged with s0[20]                     ;
+; state[9][12]                            ; Merged with state[9][31]               ;
+; s0[26]                                  ; Merged with s0[31]                     ;
+; s0[1]                                   ; Merged with s0[28]                     ;
+; s0[9]                                   ; Merged with s0[14]                     ;
+; state[2][28]                            ; Merged with state[2][31]               ;
+; s0[10]                                  ; Merged with s0[15]                     ;
+; s0[28,30..31]                           ; Stuck at GND due to stuck port data_in ;
+; s0[21]                                  ; Stuck at VCC due to stuck port data_in ;
+; gamelock[31]                            ; Stuck at GND due to stuck port data_in ;
+; headx[0]                                ; Stuck at GND due to stuck port data_in ;
+; apple1x[0,9..31]                        ; Stuck at GND due to stuck port data_in ;
+; apple1y[0..1,9..31]                     ; Stuck at GND due to stuck port data_in ;
+; b[7,31]                                 ; Stuck at GND due to stuck port data_in ;
+; state[9][31]                            ; Stuck at GND due to stuck port data_in ;
+; state[9][30]                            ; Stuck at GND due to stuck port data_in ;
+; state[9][3]                             ; Stuck at GND due to stuck port data_in ;
+; state[8][31]                            ; Stuck at GND due to stuck port data_in ;
+; state[8][30]                            ; Stuck at GND due to stuck port data_in ;
+; state[8][28]                            ; Stuck at GND due to stuck port data_in ;
+; state[7][31]                            ; Stuck at GND due to stuck port data_in ;
+; state[7][28]                            ; Stuck at GND due to stuck port data_in ;
+; state[7][30]                            ; Stuck at GND due to stuck port data_in ;
+; state[6][31]                            ; Stuck at GND due to stuck port data_in ;
+; state[6][30]                            ; Stuck at GND due to stuck port data_in ;
+; state[6][28]                            ; Stuck at GND due to stuck port data_in ;
+; state[5][30]                            ; Stuck at GND due to stuck port data_in ;
+; state[5][31]                            ; Stuck at GND due to stuck port data_in ;
+; state[5][28]                            ; Stuck at GND due to stuck port data_in ;
+; state[4][31]                            ; Stuck at GND due to stuck port data_in ;
+; state[4][28]                            ; Stuck at GND due to stuck port data_in ;
+; state[4][30]                            ; Stuck at GND due to stuck port data_in ;
+; state[3][28]                            ; Stuck at GND due to stuck port data_in ;
+; state[3][30]                            ; Stuck at GND due to stuck port data_in ;
+; state[3][31]                            ; Stuck at GND due to stuck port data_in ;
+; state[2][31]                            ; Stuck at GND due to stuck port data_in ;
+; state[2][30]                            ; Stuck at GND due to stuck port data_in ;
+; state[1][31]                            ; Stuck at GND due to stuck port data_in ;
+; state[1][30]                            ; Stuck at GND due to stuck port data_in ;
+; state[1][28]                            ; Stuck at GND due to stuck port data_in ;
+; s0[14]                                  ; Merged with s0[15]                     ;
+; body_y[1][0]                            ; Merged with body_x[1][0]               ;
+; body_x[1][0]                            ; Stuck at GND due to stuck port data_in ;
+; s0[15]                                  ; Merged with s0[20]                     ;
+; Total Number of Removed Registers = 421 ;                                        ;
++-----------------------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 868   ;
+; Number of registers using Synchronous Clear  ; 51    ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 836   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 120   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------+
+; Inverted Register Statistics                      ;
++-----------------------------------------+---------+
+; Inverted Register                       ; Fan out ;
++-----------------------------------------+---------+
+; vga_hs                                  ; 25      ;
+; vga_vs                                  ; 2       ;
+; divn:u0|clk_p                           ; 818     ;
+; headx[6]                                ; 7       ;
+; headx[8]                                ; 7       ;
+; headx[2]                                ; 7       ;
+; headx[4]                                ; 7       ;
+; heady[6]                                ; 7       ;
+; heady[7]                                ; 7       ;
+; heady[5]                                ; 7       ;
+; heady[4]                                ; 7       ;
+; dir[0]                                  ; 3       ;
+; dir[1]                                  ; 3       ;
+; s0[20]                                  ; 77      ;
+; fib[2]                                  ; 16      ;
+; fib[1]                                  ; 16      ;
+; fib[0]                                  ; 16      ;
+; fib[3]                                  ; 14      ;
+; apple1x[2]                              ; 2       ;
+; apple1x[3]                              ; 2       ;
+; apple1x[5]                              ; 2       ;
+; apple1x[8]                              ; 2       ;
+; apple1y[3]                              ; 2       ;
+; apple1y[4]                              ; 2       ;
+; apple1y[5]                              ; 2       ;
+; apple1y[6]                              ; 2       ;
+; b[0]                                    ; 15      ;
+; state[9][0]                             ; 1       ;
+; state[1][0]                             ; 2       ;
+; state[2][0]                             ; 1       ;
+; state[3][0]                             ; 1       ;
+; state[4][0]                             ; 1       ;
+; state[6][0]                             ; 1       ;
+; state[5][0]                             ; 1       ;
+; state[7][0]                             ; 1       ;
+; state[8][0]                             ; 1       ;
+; Total number of inverted registers = 36 ;         ;
++-----------------------------------------+---------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |FinalProject|gamelock[1]   ;
+; 4:1                ; 712 bits  ; 1424 LEs      ; 712 LEs              ; 712 LEs                ; Yes        ; |FinalProject|body_x[7][29] ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; Yes        ; |FinalProject|hex0_d[5]     ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; Yes        ; |FinalProject|hex1_d[6]     ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; Yes        ; |FinalProject|hex2_d[6]     ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; Yes        ; |FinalProject|hex3_d[6]     ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FinalProject|clock[23]     ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |FinalProject|timeSecond[2] ;
+; 5:1                ; 38 bits   ; 114 LEs       ; 38 LEs               ; 76 LEs                 ; Yes        ; |FinalProject|dir[9]        ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |FinalProject|scoreFirst[0] ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |FinalProject|timeFirst[2]  ;
+; 6:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |FinalProject|b[1]          ;
+; 6:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |FinalProject|s0[30]        ;
+; 4:1                ; 25 bits   ; 50 LEs        ; 25 LEs               ; 25 LEs                 ; Yes        ; |FinalProject|headx[2]      ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; Yes        ; |FinalProject|dir[1]        ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; Yes        ; |FinalProject|s0[21]        ;
+; 3:1                ; 62 bits   ; 124 LEs       ; 62 LEs               ; 62 LEs                 ; No         ; |FinalProject|heady         ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |FinalProject|dir           ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |FinalProject|gamelock      ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |FinalProject|gamelock      ;
+; 4:1                ; 31 bits   ; 62 LEs        ; 31 LEs               ; 31 LEs                 ; No         ; |FinalProject|heady         ;
+; 4:1                ; 49 bits   ; 98 LEs        ; 49 LEs               ; 49 LEs                 ; No         ; |FinalProject|apple1y       ;
+; 4:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; No         ; |FinalProject|apple1y       ;
+; 4:1                ; 30 bits   ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; No         ; |FinalProject|dir           ;
+; 5:1                ; 31 bits   ; 93 LEs        ; 31 LEs               ; 62 LEs                 ; No         ; |FinalProject|headx         ;
+; 16:1               ; 4 bits    ; 40 LEs        ; 24 LEs               ; 16 LEs                 ; No         ; |FinalProject|b             ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; No         ; |FinalProject|gamelock      ;
+; 9:1                ; 64 bits   ; 384 LEs       ; 384 LEs              ; 0 LEs                  ; No         ; |FinalProject|Mux50         ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; No         ; |FinalProject|state         ;
+; 6:1                ; 64 bits   ; 256 LEs       ; 128 LEs              ; 128 LEs                ; No         ; |FinalProject|body_x        ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; No         ; |FinalProject|state         ;
+; 6:1                ; 64 bits   ; 256 LEs       ; 128 LEs              ; 128 LEs                ; No         ; |FinalProject|body_y        ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; No         ; |FinalProject|state         ;
+; 6:1                ; 64 bits   ; 256 LEs       ; 128 LEs              ; 128 LEs                ; No         ; |FinalProject|body_y        ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; No         ; |FinalProject|state         ;
+; 6:1                ; 64 bits   ; 256 LEs       ; 128 LEs              ; 128 LEs                ; No         ; |FinalProject|body_x        ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; No         ; |FinalProject|state         ;
+; 6:1                ; 64 bits   ; 256 LEs       ; 128 LEs              ; 128 LEs                ; No         ; |FinalProject|body_y        ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; No         ; |FinalProject|state         ;
+; 6:1                ; 64 bits   ; 256 LEs       ; 128 LEs              ; 128 LEs                ; No         ; |FinalProject|body_y        ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; No         ; |FinalProject|state         ;
+; 6:1                ; 64 bits   ; 256 LEs       ; 128 LEs              ; 128 LEs                ; No         ; |FinalProject|body_x        ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; No         ; |FinalProject|state         ;
+; 6:1                ; 64 bits   ; 256 LEs       ; 128 LEs              ; 128 LEs                ; No         ; |FinalProject|body_x        ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; No         ; |FinalProject|state         ;
+; 6:1                ; 64 bits   ; 256 LEs       ; 128 LEs              ; 128 LEs                ; No         ; |FinalProject|body_y        ;
+; 3:1                ; 64 bits   ; 128 LEs       ; 64 LEs               ; 64 LEs                 ; No         ; |FinalProject|body_x        ;
+; 3:1                ; 512 bits  ; 1024 LEs      ; 1024 LEs             ; 0 LEs                  ; No         ; |FinalProject|body_y        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
+
+
++------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |FinalProject ;
++----------------+-------+-----------------------------------------------------+
+; Parameter Name ; Value ; Type                                                ;
++----------------+-------+-----------------------------------------------------+
+; H_FRONT        ; 16    ; Signed Integer                                      ;
+; H_SYNC         ; 96    ; Signed Integer                                      ;
+; H_BACK         ; 48    ; Signed Integer                                      ;
+; H_ACT          ; 640   ; Signed Integer                                      ;
+; H_BLANK        ; 160   ; Signed Integer                                      ;
+; H_TOTAL        ; 800   ; Signed Integer                                      ;
+; V_FRONT        ; 11    ; Signed Integer                                      ;
+; V_SYNC         ; 2     ; Signed Integer                                      ;
+; V_BACK         ; 32    ; Signed Integer                                      ;
+; V_ACT          ; 480   ; Signed Integer                                      ;
+; V_BLANK        ; 45    ; Signed Integer                                      ;
+; V_TOTAL        ; 525   ; Signed Integer                                      ;
++----------------+-------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------+
+; Parameter Settings for User Entity Instance: divn:u0 ;
++----------------+-------+-----------------------------+
+; Parameter Name ; Value ; Type                        ;
++----------------+-------+-----------------------------+
+; WIDTH          ; 26    ; Signed Integer              ;
+; N              ; 2     ; Signed Integer              ;
++----------------+-------+-----------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0 ;
++------------------------+----------------+------------------------+
+; Parameter Name         ; Value          ; Type                   ;
++------------------------+----------------+------------------------+
+; LPM_WIDTHN             ; 32             ; Untyped                ;
+; LPM_WIDTHD             ; 32             ; Untyped                ;
+; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                ;
+; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                ;
+; LPM_PIPELINE           ; 0              ; Untyped                ;
+; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                ;
+; CBXI_PARAMETER         ; lpm_divide_3po ; Untyped                ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY             ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY           ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE           ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE         ;
++------------------------+----------------+------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_divide:Mod2 ;
++------------------------+----------------+------------------------+
+; Parameter Name         ; Value          ; Type                   ;
++------------------------+----------------+------------------------+
+; LPM_WIDTHN             ; 32             ; Untyped                ;
+; LPM_WIDTHD             ; 32             ; Untyped                ;
+; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                ;
+; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                ;
+; LPM_PIPELINE           ; 0              ; Untyped                ;
+; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                ;
+; CBXI_PARAMETER         ; lpm_divide_3po ; Untyped                ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY             ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY           ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE           ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE         ;
++------------------------+----------------+------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_divide:Mod1 ;
++------------------------+----------------+------------------------+
+; Parameter Name         ; Value          ; Type                   ;
++------------------------+----------------+------------------------+
+; LPM_WIDTHN             ; 32             ; Untyped                ;
+; LPM_WIDTHD             ; 32             ; Untyped                ;
+; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                ;
+; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                ;
+; LPM_PIPELINE           ; 0              ; Untyped                ;
+; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                ;
+; CBXI_PARAMETER         ; lpm_divide_3po ; Untyped                ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY             ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY           ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE           ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE         ;
++------------------------+----------------+------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+    Info: Processing started: Mon Nov 24 20:05:50 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FinalProject -c FinalProject
+Info: Found 1 design units, including 1 entities, in source file finalproject.v
+    Info: Found entity 1: FinalProject
+Info: Found 1 design units, including 1 entities, in source file divn.v
+    Info: Found entity 1: divn
+Warning (10236): Verilog HDL Implicit Net warning at FinalProject.v(107): created implicit net for "VGA_SYNC"
+Warning (10236): Verilog HDL Implicit Net warning at FinalProject.v(108): created implicit net for "VGA_BLANK"
+Warning (10236): Verilog HDL Implicit Net warning at FinalProject.v(109): created implicit net for "VGA_CLK"
+Info: Elaborating entity "FinalProject" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at FinalProject.v(107): object "VGA_SYNC" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at FinalProject.v(108): object "VGA_BLANK" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at FinalProject.v(109): object "VGA_CLK" assigned a value but never read
+Warning (10230): Verilog HDL assignment warning at FinalProject.v(122): truncated value with size 10 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at FinalProject.v(123): truncated value with size 10 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at FinalProject.v(124): truncated value with size 10 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at FinalProject.v(150): truncated value with size 32 to match size of target (11)
+Warning (10230): Verilog HDL assignment warning at FinalProject.v(178): truncated value with size 32 to match size of target (11)
+Warning (10230): Verilog HDL assignment warning at FinalProject.v(605): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at FinalProject.v(712): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at FinalProject.v(723): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at FinalProject.v(728): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at FinalProject.v(780): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at FinalProject.v(800): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at FinalProject.v(850): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at FinalProject.v(869): truncated value with size 32 to match size of target (10)
+Warning (10034): Output port "LEDG" at FinalProject.v(19) has no driver
+Warning (10034): Output port "DRAM_ADDR" at FinalProject.v(27) has no driver
+Warning (10034): Output port "FL_ADDR" at FinalProject.v(41) has no driver
+Warning (10034): Output port "GPIO0_CLKOUT" at FinalProject.v(74) has no driver
+Warning (10034): Output port "GPIO1_CLKOUT" at FinalProject.v(77) has no driver
+Warning (10034): Output port "HEX0_DP" at FinalProject.v(11) has no driver
+Warning (10034): Output port "HEX1_DP" at FinalProject.v(13) has no driver
+Warning (10034): Output port "HEX2_DP" at FinalProject.v(15) has no driver
+Warning (10034): Output port "HEX3_DP" at FinalProject.v(17) has no driver
+Warning (10034): Output port "UART_TXD" at FinalProject.v(21) has no driver
+Warning (10034): Output port "UART_CTS" at FinalProject.v(23) has no driver
+Warning (10034): Output port "DRAM_LDQM" at FinalProject.v(28) has no driver
+Warning (10034): Output port "DRAM_UDQM" at FinalProject.v(29) has no driver
+Warning (10034): Output port "DRAM_WE_N" at FinalProject.v(30) has no driver
+Warning (10034): Output port "DRAM_CAS_N" at FinalProject.v(31) has no driver
+Warning (10034): Output port "DRAM_RAS_N" at FinalProject.v(32) has no driver
+Warning (10034): Output port "DRAM_CS_N" at FinalProject.v(33) has no driver
+Warning (10034): Output port "DRAM_BA_0" at FinalProject.v(34) has no driver
+Warning (10034): Output port "DRAM_BA_1" at FinalProject.v(35) has no driver
+Warning (10034): Output port "DRAM_CLK" at FinalProject.v(36) has no driver
+Warning (10034): Output port "DRAM_CKE" at FinalProject.v(37) has no driver
+Warning (10034): Output port "FL_WE_N" at FinalProject.v(42) has no driver
+Warning (10034): Output port "FL_RST_N" at FinalProject.v(43) has no driver
+Warning (10034): Output port "FL_OE_N" at FinalProject.v(44) has no driver
+Warning (10034): Output port "FL_CE_N" at FinalProject.v(45) has no driver
+Warning (10034): Output port "FL_WP_N" at FinalProject.v(46) has no driver
+Warning (10034): Output port "FL_BYTE_N" at FinalProject.v(47) has no driver
+Warning (10034): Output port "LCD_BLON" at FinalProject.v(51) has no driver
+Warning (10034): Output port "LCD_RW" at FinalProject.v(52) has no driver
+Warning (10034): Output port "LCD_EN" at FinalProject.v(53) has no driver
+Warning (10034): Output port "LCD_RS" at FinalProject.v(54) has no driver
+Warning (10034): Output port "SD_CLK" at FinalProject.v(59) has no driver
+Info: Elaborating entity "divn" for hierarchy "divn:u0"
+Warning (10230): Verilog HDL assignment warning at divn.v(24): truncated value with size 32 to match size of target (26)
+Warning (10230): Verilog HDL assignment warning at divn.v(42): truncated value with size 32 to match size of target (26)
+Info: Inferred 3 megafunctions from design logic
+    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod0"
+    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod2"
+    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod1"
+Info: Elaborated megafunction instantiation "lpm_divide:Mod0"
+Info: Instantiated megafunction "lpm_divide:Mod0" with the following parameter:
+    Info: Parameter "LPM_WIDTHN" = "32"
+    Info: Parameter "LPM_WIDTHD" = "32"
+    Info: Parameter "LPM_NREPRESENTATION" = "SIGNED"
+    Info: Parameter "LPM_DREPRESENTATION" = "SIGNED"
+    Info: Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
+Info: Found 1 design units, including 1 entities, in source file db/lpm_divide_3po.tdf
+    Info: Found entity 1: lpm_divide_3po
+Info: Found 1 design units, including 1 entities, in source file db/abs_divider_4dg.tdf
+    Info: Found entity 1: abs_divider_4dg
+Info: Found 1 design units, including 1 entities, in source file db/alt_u_div_t8f.tdf
+    Info: Found entity 1: alt_u_div_t8f
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_unc.tdf
+    Info: Found entity 1: add_sub_unc
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_vnc.tdf
+    Info: Found entity 1: add_sub_vnc
+Info: Found 1 design units, including 1 entities, in source file db/lpm_abs_9v9.tdf
+    Info: Found entity 1: lpm_abs_9v9
+Info: Elaborated megafunction instantiation "lpm_divide:Mod2"
+Info: Instantiated megafunction "lpm_divide:Mod2" with the following parameter:
+    Info: Parameter "LPM_WIDTHN" = "32"
+    Info: Parameter "LPM_WIDTHD" = "32"
+    Info: Parameter "LPM_NREPRESENTATION" = "SIGNED"
+    Info: Parameter "LPM_DREPRESENTATION" = "SIGNED"
+    Info: Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
+Info: Elaborated megafunction instantiation "lpm_divide:Mod1"
+Info: Instantiated megafunction "lpm_divide:Mod1" with the following parameter:
+    Info: Parameter "LPM_WIDTHN" = "32"
+    Info: Parameter "LPM_WIDTHD" = "32"
+    Info: Parameter "LPM_NREPRESENTATION" = "SIGNED"
+    Info: Parameter "LPM_DREPRESENTATION" = "SIGNED"
+    Info: Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
+Warning: The following bidir pins have no drivers
+    Warning: Bidir "DRAM_DQ[0]" has no driver
+    Warning: Bidir "DRAM_DQ[1]" has no driver
+    Warning: Bidir "DRAM_DQ[2]" has no driver
+    Warning: Bidir "DRAM_DQ[3]" has no driver
+    Warning: Bidir "DRAM_DQ[4]" has no driver
+    Warning: Bidir "DRAM_DQ[5]" has no driver
+    Warning: Bidir "DRAM_DQ[6]" has no driver
+    Warning: Bidir "DRAM_DQ[7]" has no driver
+    Warning: Bidir "DRAM_DQ[8]" has no driver
+    Warning: Bidir "DRAM_DQ[9]" has no driver
+    Warning: Bidir "DRAM_DQ[10]" has no driver
+    Warning: Bidir "DRAM_DQ[11]" has no driver
+    Warning: Bidir "DRAM_DQ[12]" has no driver
+    Warning: Bidir "DRAM_DQ[13]" has no driver
+    Warning: Bidir "DRAM_DQ[14]" has no driver
+    Warning: Bidir "DRAM_DQ[15]" has no driver
+    Warning: Bidir "FL_DQ[0]" has no driver
+    Warning: Bidir "FL_DQ[1]" has no driver
+    Warning: Bidir "FL_DQ[2]" has no driver
+    Warning: Bidir "FL_DQ[3]" has no driver
+    Warning: Bidir "FL_DQ[4]" has no driver
+    Warning: Bidir "FL_DQ[5]" has no driver
+    Warning: Bidir "FL_DQ[6]" has no driver
+    Warning: Bidir "FL_DQ[7]" has no driver
+    Warning: Bidir "FL_DQ[8]" has no driver
+    Warning: Bidir "FL_DQ[9]" has no driver
+    Warning: Bidir "FL_DQ[10]" has no driver
+    Warning: Bidir "FL_DQ[11]" has no driver
+    Warning: Bidir "FL_DQ[12]" has no driver
+    Warning: Bidir "FL_DQ[13]" has no driver
+    Warning: Bidir "FL_DQ[14]" has no driver
+    Warning: Bidir "FL_DQ15_AM1" has no driver
+    Warning: Bidir "LCD_DATA[0]" has no driver
+    Warning: Bidir "LCD_DATA[1]" has no driver
+    Warning: Bidir "LCD_DATA[2]" has no driver
+    Warning: Bidir "LCD_DATA[3]" has no driver
+    Warning: Bidir "LCD_DATA[4]" has no driver
+    Warning: Bidir "LCD_DATA[5]" has no driver
+    Warning: Bidir "LCD_DATA[6]" has no driver
+    Warning: Bidir "LCD_DATA[7]" has no driver
+    Warning: Bidir "SD_DAT0" has no driver
+    Warning: Bidir "SD_DAT3" has no driver
+    Warning: Bidir "SD_CMD" has no driver
+    Warning: Bidir "PS2_KBDAT" has no driver
+    Warning: Bidir "PS2_KBCLK" has no driver
+    Warning: Bidir "PS2_MSDAT" has no driver
+    Warning: Bidir "PS2_MSCLK" has no driver
+    Warning: Bidir "GPIO0_D[0]" has no driver
+    Warning: Bidir "GPIO0_D[1]" has no driver
+    Warning: Bidir "GPIO0_D[2]" has no driver
+    Warning: Bidir "GPIO0_D[3]" has no driver
+    Warning: Bidir "GPIO0_D[4]" has no driver
+    Warning: Bidir "GPIO0_D[5]" has no driver
+    Warning: Bidir "GPIO0_D[6]" has no driver
+    Warning: Bidir "GPIO0_D[7]" has no driver
+    Warning: Bidir "GPIO0_D[8]" has no driver
+    Warning: Bidir "GPIO0_D[9]" has no driver
+    Warning: Bidir "GPIO0_D[10]" has no driver
+    Warning: Bidir "GPIO0_D[11]" has no driver
+    Warning: Bidir "GPIO0_D[12]" has no driver
+    Warning: Bidir "GPIO0_D[13]" has no driver
+    Warning: Bidir "GPIO0_D[14]" has no driver
+    Warning: Bidir "GPIO0_D[15]" has no driver
+    Warning: Bidir "GPIO0_D[16]" has no driver
+    Warning: Bidir "GPIO0_D[17]" has no driver
+    Warning: Bidir "GPIO0_D[18]" has no driver
+    Warning: Bidir "GPIO0_D[19]" has no driver
+    Warning: Bidir "GPIO0_D[20]" has no driver
+    Warning: Bidir "GPIO0_D[21]" has no driver
+    Warning: Bidir "GPIO0_D[22]" has no driver
+    Warning: Bidir "GPIO0_D[23]" has no driver
+    Warning: Bidir "GPIO0_D[24]" has no driver
+    Warning: Bidir "GPIO0_D[25]" has no driver
+    Warning: Bidir "GPIO0_D[26]" has no driver
+    Warning: Bidir "GPIO0_D[27]" has no driver
+    Warning: Bidir "GPIO0_D[28]" has no driver
+    Warning: Bidir "GPIO0_D[29]" has no driver
+    Warning: Bidir "GPIO0_D[30]" has no driver
+    Warning: Bidir "GPIO0_D[31]" has no driver
+    Warning: Bidir "GPIO1_D[0]" has no driver
+    Warning: Bidir "GPIO1_D[1]" has no driver
+    Warning: Bidir "GPIO1_D[2]" has no driver
+    Warning: Bidir "GPIO1_D[3]" has no driver
+    Warning: Bidir "GPIO1_D[4]" has no driver
+    Warning: Bidir "GPIO1_D[5]" has no driver
+    Warning: Bidir "GPIO1_D[6]" has no driver
+    Warning: Bidir "GPIO1_D[7]" has no driver
+    Warning: Bidir "GPIO1_D[8]" has no driver
+    Warning: Bidir "GPIO1_D[9]" has no driver
+    Warning: Bidir "GPIO1_D[10]" has no driver
+    Warning: Bidir "GPIO1_D[11]" has no driver
+    Warning: Bidir "GPIO1_D[12]" has no driver
+    Warning: Bidir "GPIO1_D[13]" has no driver
+    Warning: Bidir "GPIO1_D[14]" has no driver
+    Warning: Bidir "GPIO1_D[15]" has no driver
+    Warning: Bidir "GPIO1_D[16]" has no driver
+    Warning: Bidir "GPIO1_D[17]" has no driver
+    Warning: Bidir "GPIO1_D[18]" has no driver
+    Warning: Bidir "GPIO1_D[19]" has no driver
+    Warning: Bidir "GPIO1_D[20]" has no driver
+    Warning: Bidir "GPIO1_D[21]" has no driver
+    Warning: Bidir "GPIO1_D[22]" has no driver
+    Warning: Bidir "GPIO1_D[23]" has no driver
+    Warning: Bidir "GPIO1_D[24]" has no driver
+    Warning: Bidir "GPIO1_D[25]" has no driver
+    Warning: Bidir "GPIO1_D[26]" has no driver
+    Warning: Bidir "GPIO1_D[27]" has no driver
+    Warning: Bidir "GPIO1_D[28]" has no driver
+    Warning: Bidir "GPIO1_D[29]" has no driver
+    Warning: Bidir "GPIO1_D[30]" has no driver
+    Warning: Bidir "GPIO1_D[31]" has no driver
+Info: Registers with preset signals will power-up high
+Info: DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning: Output pins are stuck at VCC or GND
+    Warning (13410): Pin "HEX0_DP" is stuck at GND
+    Warning (13410): Pin "HEX1_DP" is stuck at GND
+    Warning (13410): Pin "HEX2_DP" is stuck at GND
+    Warning (13410): Pin "HEX3_DP" is stuck at GND
+    Warning (13410): Pin "LEDG[0]" is stuck at GND
+    Warning (13410): Pin "LEDG[1]" is stuck at GND
+    Warning (13410): Pin "LEDG[2]" is stuck at GND
+    Warning (13410): Pin "LEDG[3]" is stuck at GND
+    Warning (13410): Pin "LEDG[4]" is stuck at GND
+    Warning (13410): Pin "LEDG[5]" is stuck at GND
+    Warning (13410): Pin "LEDG[6]" is stuck at GND
+    Warning (13410): Pin "LEDG[7]" is stuck at GND
+    Warning (13410): Pin "LEDG[8]" is stuck at GND
+    Warning (13410): Pin "LEDG[9]" is stuck at GND
+    Warning (13410): Pin "UART_TXD" is stuck at GND
+    Warning (13410): Pin "UART_CTS" is stuck at GND
+    Warning (13410): Pin "DRAM_ADDR[0]" is stuck at GND
+    Warning (13410): Pin "DRAM_ADDR[1]" is stuck at GND
+    Warning (13410): Pin "DRAM_ADDR[2]" is stuck at GND
+    Warning (13410): Pin "DRAM_ADDR[3]" is stuck at GND
+    Warning (13410): Pin "DRAM_ADDR[4]" is stuck at GND
+    Warning (13410): Pin "DRAM_ADDR[5]" is stuck at GND
+    Warning (13410): Pin "DRAM_ADDR[6]" is stuck at GND
+    Warning (13410): Pin "DRAM_ADDR[7]" is stuck at GND
+    Warning (13410): Pin "DRAM_ADDR[8]" is stuck at GND
+    Warning (13410): Pin "DRAM_ADDR[9]" is stuck at GND
+    Warning (13410): Pin "DRAM_ADDR[10]" is stuck at GND
+    Warning (13410): Pin "DRAM_ADDR[11]" is stuck at GND
+    Warning (13410): Pin "DRAM_ADDR[12]" is stuck at GND
+    Warning (13410): Pin "DRAM_LDQM" is stuck at GND
+    Warning (13410): Pin "DRAM_UDQM" is stuck at GND
+    Warning (13410): Pin "DRAM_WE_N" is stuck at GND
+    Warning (13410): Pin "DRAM_CAS_N" is stuck at GND
+    Warning (13410): Pin "DRAM_RAS_N" is stuck at GND
+    Warning (13410): Pin "DRAM_CS_N" is stuck at GND
+    Warning (13410): Pin "DRAM_BA_0" is stuck at GND
+    Warning (13410): Pin "DRAM_BA_1" is stuck at GND
+    Warning (13410): Pin "DRAM_CLK" is stuck at GND
+    Warning (13410): Pin "DRAM_CKE" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[0]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[1]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[2]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[3]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[4]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[5]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[6]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[7]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[8]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[9]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[10]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[11]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[12]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[13]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[14]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[15]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[16]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[17]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[18]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[19]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[20]" is stuck at GND
+    Warning (13410): Pin "FL_ADDR[21]" is stuck at GND
+    Warning (13410): Pin "FL_WE_N" is stuck at GND
+    Warning (13410): Pin "FL_RST_N" is stuck at GND
+    Warning (13410): Pin "FL_OE_N" is stuck at GND
+    Warning (13410): Pin "FL_CE_N" is stuck at GND
+    Warning (13410): Pin "FL_WP_N" is stuck at GND
+    Warning (13410): Pin "FL_BYTE_N" is stuck at GND
+    Warning (13410): Pin "LCD_BLON" is stuck at GND
+    Warning (13410): Pin "LCD_RW" is stuck at GND
+    Warning (13410): Pin "LCD_EN" is stuck at GND
+    Warning (13410): Pin "LCD_RS" is stuck at GND
+    Warning (13410): Pin "SD_CLK" is stuck at GND
+    Warning (13410): Pin "GPIO0_CLKOUT[0]" is stuck at GND
+    Warning (13410): Pin "GPIO0_CLKOUT[1]" is stuck at GND
+    Warning (13410): Pin "GPIO1_CLKOUT[0]" is stuck at GND
+    Warning (13410): Pin "GPIO1_CLKOUT[1]" is stuck at GND
+Info: Timing-Driven Synthesis is running
+Info: Generated suppressed messages file Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/SW+B+VGA_乒乓球Pong game+SNAKE+射擊/CS255B-1 SNAKE/FinalProject/FinalProject.map.smsg
+Warning: Design contains 18 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "CLOCK_50_2"
+    Warning (15610): No output dependent on input pin "SW[1]"
+    Warning (15610): No output dependent on input pin "SW[2]"
+    Warning (15610): No output dependent on input pin "SW[3]"
+    Warning (15610): No output dependent on input pin "SW[4]"
+    Warning (15610): No output dependent on input pin "SW[5]"
+    Warning (15610): No output dependent on input pin "SW[6]"
+    Warning (15610): No output dependent on input pin "SW[7]"
+    Warning (15610): No output dependent on input pin "SW[8]"
+    Warning (15610): No output dependent on input pin "SW[9]"
+    Warning (15610): No output dependent on input pin "UART_RXD"
+    Warning (15610): No output dependent on input pin "UART_RTS"
+    Warning (15610): No output dependent on input pin "FL_RY"
+    Warning (15610): No output dependent on input pin "SD_WP_N"
+    Warning (15610): No output dependent on input pin "GPIO0_CLKIN[0]"
+    Warning (15610): No output dependent on input pin "GPIO0_CLKIN[1]"
+    Warning (15610): No output dependent on input pin "GPIO1_CLKIN[0]"
+    Warning (15610): No output dependent on input pin "GPIO1_CLKIN[1]"
+Info: Implemented 10004 device resources after synthesis - the final resource count might be different
+    Info: Implemented 23 input pins
+    Info: Implemented 118 output pins
+    Info: Implemented 111 bidirectional pins
+    Info: Implemented 9752 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 261 warnings
+    Info: Peak virtual memory: 264 megabytes
+    Info: Processing ended: Mon Nov 24 20:08:37 2025
+    Info: Elapsed time: 00:02:47
+    Info: Total CPU time (on all processors): 00:00:55
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in Z:/! 計畫_實踐 DSL1112遊戲專案 NAS_1119/SW+B+VGA_乒乓球Pong game+SNAKE+射擊/CS255B-1 SNAKE/FinalProject/FinalProject.map.smsg.
+
+

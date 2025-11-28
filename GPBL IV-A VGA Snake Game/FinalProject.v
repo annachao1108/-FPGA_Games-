@@ -1,0 +1,918 @@
+module FinalProject (
+	////////////////////////	Clock Input	 	////////////////////////
+	input			CLOCK_50,				//	50 MHz
+	input			CLOCK_50_2,				//	50 MHz
+	////////////////////////	Push Button		////////////////////////
+	input	[2:0]	ORG_BUTTON,				//	Pushbutton[2:0]
+	////////////////////////	DPDT Switch		////////////////////////
+	input	[9:0]	SW,					//	Toggle Switch[9:0]
+	////////////////////////	7-SEG Dispaly	////////////////////////
+	output	[0:6]	HEX0_D,				//	Seven Segment Digit 0
+	output			HEX0_DP,				//	Seven Segment Digit DP 0
+	output	[0:6]	HEX1_D,				//	Seven Segment Digit 1
+	output			HEX1_DP,				//	Seven Segment Digit DP 1
+	output	[0:6]	HEX2_D,				//	Seven Segment Digit 2
+	output			HEX2_DP,				//	Seven Segment Digit DP 2
+	output	[0:6]	HEX3_D,				//	Seven Segment Digit 3
+	output			HEX3_DP,				//	Seven Segment Digit DP 3
+	////////////////////////////	LED		////////////////////////////
+	output	[9:0]	LEDG,					//	LED Green[9:0]
+	////////////////////////////	UART	////////////////////////////
+	output			UART_TXD,				//	UART Transmitter
+	input			UART_RXD,				//	UART Receiver
+	output			UART_CTS,				//	UART Clear To Send
+	input			UART_RTS,				//	UART Request To Send
+	///////////////////////		SDRAM Interface	////////////////////////
+	inout	[15:0]	DRAM_DQ,				//	SDRAM Data bus 16 Bits
+	output	[12:0]	DRAM_ADDR,				//	SDRAM Address bus 13 Bits
+	output			DRAM_LDQM,				//	SDRAM Low-byte Data Mask
+	output			DRAM_UDQM,				//	SDRAM High-byte Data Mask
+	output			DRAM_WE_N,				//	SDRAM Write Enable
+	output			DRAM_CAS_N,				//	SDRAM Column Address Strobe
+	output			DRAM_RAS_N,				//	SDRAM Row Address Strobe
+	output			DRAM_CS_N,			//	SDRAM Chip Select
+	output			DRAM_BA_0,				//	SDRAM Bank Address 0
+	output			DRAM_BA_1,				//	SDRAM Bank Address 1
+	output			DRAM_CLK,				//	SDRAM Clock
+	output			DRAM_CKE,				//	SDRAM Clock Enable
+	////////////////////////	Flash Interface	////////////////////////
+	inout	[14:0]	FL_DQ,					//	FLASH Data bus 15 Bits
+	inout			FL_DQ15_AM1,			//	FLASH Data bus Bit 15 or Address A-1
+	output	[21:0]	FL_ADDR,				//	FLASH Address bus 22 Bits
+	output			FL_WE_N,				//	FLASH Write Enable
+	output			FL_RST_N,				//	FLASH Reset
+	output			FL_OE_N,				//	FLASH Output Enable
+	output			FL_CE_N,				//	FLASH Chip Enable
+	output			FL_WP_N,				//	FLASH Hardware Write Protect
+	output			FL_BYTE_N,				//	FLASH Selects 8/16-bit mode
+	input			FL_RY,					//	FLASH Ready/Busy
+	////////////////////	LCD Module 16X2	////////////////////////////
+	inout	[7:0]	LCD_DATA,				//	LCD Data bus 8 bits
+	output			LCD_BLON,				//	LCD Back Light ON/OFF
+	output			LCD_RW,					//	LCD Read/Write Select, 0 = Write, 1 = Read
+	output			LCD_EN,					//	LCD Enable
+	output			LCD_RS,					//	LCD Command/Data Select, 0 = Command, 1 = Data
+	////////////////////	SD Card Interface	////////////////////////
+	inout			SD_DAT0,				//	SD Card Data 0
+	inout			SD_DAT3,				//	SD Card Data 3
+	inout			SD_CMD,					//	SD Card Command Signal
+	output			SD_CLK,					//	SD Card Clock
+	input			SD_WP_N,				//	SD Card Write Protect
+	////////////////////////	PS2		////////////////////////////////
+	inout		 	PS2_KBDAT,			//	PS2 Keyboard Data
+	inout			PS2_KBCLK,				//	PS2 Keyboard Clock
+	inout		 	PS2_MSDAT,				//	PS2 Mouse Data
+	inout			PS2_MSCLK,				//	PS2 Mouse Clock
+	////////////////////////	VGA			////////////////////////////
+	output			VGA_HS,					//	VGA H_SYNC
+	output			VGA_VS,					//	VGA V_SYNC
+	output	[3:0]	VGA_R,   				//	VGA Red[3:0]
+	output	[3:0]	VGA_G,	 				//	VGA Green[3:0]
+	output	[3:0]	VGA_B,   				//	VGA Blue[3:0]
+	////////////////////////	GPIO	////////////////////////////////
+	input	[1:0]	GPIO0_CLKIN,			//	GPIO Connection 0 Clock In Bus
+	output	[1:0]	GPIO0_CLKOUT,			//	GPIO Connection 0 Clock Out Bus
+	inout	[31:0]	GPIO0_D,				//	GPIO Connection 0 Data Bus
+	input	[1:0]	GPIO1_CLKIN,			//	GPIO Connection 1 Clock In Bus
+	output	[1:0]	GPIO1_CLKOUT,			//	GPIO Connection 1 Clock Out Bus
+	inout	[31:0]	GPIO1_D				//	GPIO Connection 1 Data Bus
+	);
+	wire CLK_25;
+	wire CLK_to_DAC;
+	wire RST_N;
+	
+	divn # (.WIDTH(26), .N(2)) u0 (.clk(CLOCK_50),.rst_n(SW[0]),.o_clk(CLK_25));
+	
+	// VGA
+	
+	// Horizontal Parameter
+	parameter H_FRONT = 16;
+	parameter H_SYNC  = 96;
+	parameter H_BACK  = 48;
+	parameter H_ACT   = 640;
+	parameter H_BLANK = H_FRONT + H_SYNC + H_BACK;
+	parameter H_TOTAL = H_FRONT + H_SYNC + H_BACK + H_ACT;
+
+	// Vertical Parameter
+	parameter V_FRONT = 11;
+	parameter V_SYNC  = 2;
+	parameter V_BACK  = 32;
+	parameter V_ACT   = 480;
+	parameter V_BLANK = V_FRONT + V_SYNC + V_BACK;
+	parameter V_TOTAL = V_FRONT + V_SYNC + V_BACK + V_ACT;
+	  
+	  
+	// Select DAC clock
+	assign CLK_to_DAC = CLK_25;
+	assign VGA_SYNC  = 1'b0;        // This pin is unused.
+	assign VGA_BLANK = ~((H_Cont<H_BLANK)||(V_Cont<V_BLANK));
+	assign VGA_CLK   = ~CLK_to_DAC; // Invert internal clock to output clock
+	assign RST_N     = SW[0];      // Set reset signal is KEY[0]
+	
+	reg [10:0] H_Cont;
+	reg [10:0] V_Cont;
+	reg [9:0]  vga_r;
+	reg [9:0]  vga_g;
+	reg [9:0]  vga_b;
+	reg        vga_hs;
+	reg        vga_vs;
+	reg [10:0] X;
+	reg [10:0] Y;
+	
+	assign VGA_R = vga_r;
+	assign VGA_G = vga_g;
+	assign VGA_B = vga_b;
+	assign VGA_HS = vga_hs;
+	assign VGA_VS = vga_vs;
+	
+	// Horizontal Generator: Refer to the pixel clock
+	always@(posedge CLK_to_DAC, negedge RST_N) begin
+		if(!RST_N) begin
+			H_Cont <= 0;
+			vga_hs <= 1;
+			X      <= 0;
+		end 
+		else begin
+			if (H_Cont < H_TOTAL)
+				H_Cont	<=	H_Cont+1'b1;
+			else
+				H_Cont	<=	0;
+			  
+			// Horizontal Sync
+			if(H_Cont == H_FRONT-1) // Front porch end
+				vga_hs <= 1'b0;
+			  
+			if(H_Cont == H_FRONT + H_SYNC -1) // Sync pulse end
+				vga_hs <= 1'b1;
+
+			// Current X
+			if(H_Cont >= H_BLANK)
+				X <= H_Cont-H_BLANK;
+			else
+				X <= 0;
+		end
+	end
+
+	// Vertical Generator: Refer to the horizontal sync
+	always@(posedge VGA_HS, negedge RST_N) begin
+		if(!RST_N) begin
+				V_Cont <= 0;
+				vga_vs <= 1;
+				Y      <= 0;
+		end
+		else begin
+			if (V_Cont<V_TOTAL)
+				V_Cont <= V_Cont + 1'b1;
+			else
+				V_Cont	<= 0;
+			  
+			// Vertical Sync
+			if (V_Cont == V_FRONT-1) // Front porch end
+				vga_vs <= 1'b0;
+			  
+			if (V_Cont == V_FRONT + V_SYNC-1) // Sync pulse end
+				vga_vs <= 1'b1;
+			  
+			// Current Y
+			if (V_Cont >= V_BLANK)
+				Y <= V_Cont-V_BLANK;
+			else
+				Y <= 0;
+		end
+	end
+	
+	// Button
+	wire BT[0:2];
+	assign BT[0] = ORG_BUTTON[0];
+	assign BT[1] = ORG_BUTTON[1];
+	assign BT[2] = ORG_BUTTON[2];
+	
+	// Hex
+	reg [0:6]  hex0_d;
+	reg [0:6]  hex1_d;
+	reg [0:6]  hex2_d;
+	reg [0:6]  hex3_d;
+	assign HEX0_D = hex0_d;
+	assign HEX1_D = hex1_d;
+	assign HEX2_D = hex2_d;
+	assign HEX3_D = hex3_d;
+
+
+	// Game
+	
+	//clock control
+	integer s1  = 25000000;// 1s
+	integer s0  = 3750000;//0.15S
+	integer ms1 = 25000;// 1ms
+	integer	clock = 0;
+
+	integer dir = 3; //default right up-0, right-1, down-2, left-3
+	integer gamelock = 0; 
+	
+	
+	// snake
+	integer headx, heady;
+	
+	integer body_x[1:9];
+	integer body_y[1:9];
+	
+	integer tempx;
+	integer tempy;
+	
+	integer state [1:9];
+	integer b;
+	integer apple1x, apple1y;
+	
+	reg [3:0] scoreFirst;
+	reg [3:0] scoreSecond;
+	reg [3:0] timeFirst;
+	reg [3:0] timeSecond;
+	reg [3:0] Count;
+	reg [0:3] fib = 4'b1111;
+	wire [9:0] x;
+ 	wire [9:0] y;
+ 	
+ 	
+ 	
+ 	integer i;
+ 	integer k;
+	always@(posedge CLK_to_DAC, negedge RST_N) begin
+		if(!RST_N) begin
+			gamelock = 0;
+			dir = 3;
+			headx = 340;
+		    heady = 240;
+		    for(i=1;i<=9;i=i+1) begin
+				body_x[i]=0;
+				body_y[i]=0;
+				state[i]=1; 
+			end
+			b=1;
+		    apple1x = 300;
+		    apple1y = 120; 
+		    clock = 0;
+		    s0  = 3750000;
+		    vga_r <= 0;
+		    vga_g <= 0;
+			vga_b <= 0;
+			scoreFirst <= 0; 
+			scoreSecond <= 0;
+			timeFirst <= 0; 
+			timeSecond <= 0;
+			Count<=0;
+			
+		end
+		else begin
+		
+		if(gamelock == 1) begin	
+			clock = clock + 1;
+			if(clock % s1 == 0) begin
+				clock = 0;
+				timeFirst <= timeFirst + 1'b1;
+				if (timeFirst == 4'b1010) 
+				begin
+					timeSecond <= timeSecond + 1'b1;
+					timeFirst <= 0; 
+				end
+			end
+			if(clock % (100*ms1) == 0) begin
+				if(headx >= 591 || headx <= 80 || heady <= 40 || heady >= 431) begin
+					gamelock = 2;
+				end
+				else if (Count==4'b1111) begin
+					gamelock = 3;
+				end
+			end
+	
+			//control snack
+			if(clock % s0 == 0) begin
+				if (!BT[2]) begin
+					dir = dir - 1;
+				    if (dir < 0) begin 
+						dir = dir + 4;
+				    end
+				end
+				else if (!BT[0]) begin
+				    dir = dir + 1;
+				    if (dir > 3) begin
+						dir = dir - 4;
+					end
+				end
+				
+				if (dir == 0) begin //up
+					tempx=headx;
+					tempy=heady;
+					heady = heady - 10;
+					
+					if(b==1)begin
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					
+					if(b==2)begin
+						for(i=2;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==3)begin
+						for(i=3;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==4)begin
+						for(i=4;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==5)begin
+						for(i=5;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==6)begin
+						for(i=6;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==7)begin
+						for(i=7;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==8)begin
+						for(i=8;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==9)begin
+						for(i=9;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+				end
+				else if (dir == 1) begin //right
+					tempx=headx;
+					tempy=heady;
+					headx = headx + 10;
+					
+					if(b==1)begin
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					
+					if(b==2)begin
+						for(i=2;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==3)begin
+						for(i=3;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==4)begin
+						for(i=4;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==5)begin
+						for(i=5;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==6)begin
+						for(i=6;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==7)begin
+						for(i=7;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==8)begin
+						for(i=8;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==9)begin
+						for(i=9;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+				end
+				else if (dir == 2) begin //down
+					tempx=headx;
+					tempy=heady;
+					heady = heady + 10;
+					
+					if(b==1)begin
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					
+					if(b==2)begin
+						for(i=2;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==3)begin
+						for(i=3;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==4)begin
+						for(i=4;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==5)begin
+						for(i=5;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==6)begin
+						for(i=6;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==7)begin
+						for(i=7;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==8)begin
+						for(i=8;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==9)begin
+						for(i=9;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+				end
+				else if (dir == 3) begin //left
+					tempx=headx;
+					tempy=heady;
+					headx = headx - 10;
+					
+					if(b==1)begin
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					
+					if(b==2)begin
+						for(i=2;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==3)begin
+						for(i=3;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==4)begin
+						for(i=4;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==5)begin
+						for(i=5;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==6)begin
+						for(i=6;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==7)begin
+						for(i=7;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==8)begin
+						for(i=8;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+					if(b==9)begin
+						for(i=9;i>=2;i=i-1) begin
+							body_x[i]=body_x[i-1];
+							body_y[i]=body_y[i-1];
+						end
+						body_x[1]=tempx;
+						body_y[1]=tempy;
+					end
+				end
+				
+				if(headx == apple1x && heady == apple1y) begin
+					scoreFirst <= scoreFirst + 1'b1;
+					Count = Count + 1;
+					if (Count==4'b0001)
+						b=1;
+					if (Count==4'b0010)
+						b=2;
+					if (Count==4'b0011)
+						b=3;
+					if (Count==4'b0100)
+						b=4;
+					if (Count==4'b0101)
+						b=5;
+					if (Count==4'b0110) 
+						b=6;
+					if (Count==4'b0111) 
+						b=7;
+					if (Count==4'b1000) 
+						b=8;
+					if (Count==4'b1001) 
+						b=9;
+					if(b==1)begin
+						body_x[1]=headx;
+						body_y[1]=heady;
+						state[1]=0;
+					end
+					else begin
+						state[b]=0;
+						body_x[b]=body_x[b-1];
+						body_y[b]=body_y[b-1];
+					end
+					fib <= {fib[3]^fib[2], fib[0:2]};
+					if(fib==4'b0000)begin
+						apple1x = 150;
+						apple1y = 120;
+					end
+					if(fib==4'b0001)begin
+						apple1x = 150;
+						apple1y = 160;
+					end
+					if(fib==4'b0010)begin
+						apple1x = 150;
+						apple1y = 200;
+					end
+					if(fib==4'b0011)begin
+						apple1x = 200;
+						apple1y = 240;
+					end
+					if(fib==4'b0100)begin
+						apple1x = 200;
+						apple1y = 280;
+					end
+					if(fib==4'b0101)begin
+						apple1x = 200;
+						apple1y = 300;
+					end
+					if(fib==4'b0110)begin
+						apple1x = 200;
+						apple1y = 120;
+					end
+					if(fib==4'b0111)begin
+						apple1x = 200;
+						apple1y = 160;
+					end
+					if(fib==4'b1000)begin
+						apple1x = 250;
+						apple1y = 200;
+					end
+					if(fib==4'b1001)begin
+						apple1x = 300;
+						apple1y = 240;
+					end
+					if(fib==4'b1010)begin
+						apple1x = 300;
+						apple1y = 280;
+					end
+					if(fib==4'b1011)begin
+						apple1x = 250;
+						apple1y = 300;
+					end
+					if(fib==4'b1100)begin
+						apple1x = 350;
+						apple1y = 120;
+					end
+					if(fib==4'b1101)begin
+						apple1x = 400;
+						apple1y = 160;
+					end
+					if(fib==4'b1110)begin
+						apple1x = 400;
+						apple1y = 200;
+					end
+					if(fib==4'b1111)begin
+						apple1x = 400;
+						apple1y = 220;
+					end
+				end
+				if (Count==4'b1010) 
+				begin
+					s0  = 2750000;
+				end
+				if (scoreFirst == 4'b1010) 
+				begin
+					scoreSecond <= scoreSecond + 1'b1;
+					scoreFirst <= 0; 
+				end 
+				
+			end
+		end
+		vga_g <= ( X <= headx+10 && X >= headx && Y >= heady && Y <= heady+10 ) ? 1023 :
+				 (state[1]==0&&X <= body_x[1]+10 && X >= body_x[1] && Y >= body_y[1] && Y <= body_y[1]+10 )?1023:
+				 (state[2]==0&&X <= body_x[2]+10 && X >= body_x[2] && Y >= body_y[2] && Y <= body_y[2]+10 )?1023:
+				 (state[3]==0&&X <= body_x[3]+10 && X >= body_x[3] && Y >= body_y[3] && Y <= body_y[3]+10 )?1023:
+				 (state[4]==0&&X <= body_x[4]+10 && X >= body_x[4] && Y >= body_y[4] && Y <= body_y[4]+10 )?1023:
+				 (state[5]==0&&X <= body_x[5]+10 && X >= body_x[5] && Y >= body_y[5] && Y <= body_y[5]+10 )?1023:
+				 (state[6]==0&&X <= body_x[6]+10 && X >= body_x[6] && Y >= body_y[6] && Y <= body_y[6]+10 )?1023:
+				 (state[7]==0&&X <= body_x[7]+10 && X >= body_x[7] && Y >= body_y[7] && Y <= body_y[7]+10 )?1023:
+				 (state[8]==0&&X <= body_x[8]+10 && X >= body_x[8] && Y >= body_y[8] && Y <= body_y[8]+10 )?1023:
+				 (state[9]==0&&X <= body_x[9]+10 && X >= body_x[9] && Y >= body_y[9] && Y <= body_y[9]+10 )?1023:
+				 128;					 
+		vga_b <= ( Y >= 1 && Y <= 40 && X <= 640 && X >= 41) ? 1023 :
+				 ( Y >= 441 && Y <= 480  && X <= 640  && X >= 41) ? 1023 :
+				 ( X <= 640 && X >= 601) ? 1023 :
+				 ( X <= 80 && X >= 41) ? 1023:
+				 128;
+		vga_r <= ( Y >= 1 && Y <= 40 && X <= 640 && X >= 41) ? 1023 :
+				 ( Y >= 441 && Y <= 480  && X <= 640  && X >= 41) ? 1023 :
+				 ( X <= 640 && X >= 601) ? 1023 :
+				 ( X <= 80 && X >= 41) ? 1023:
+				 (X >= apple1x+1 && X <= apple1x+10 && Y >= apple1y+1 && Y <= apple1y+10)? 1023:
+				 ( X <= headx+10 && X >= headx && Y >= heady && Y <= heady+10 ) ? 1023 :
+				 128;
+		 hex0_d  = (scoreFirst[3:0] == 4'b0000) ? 7'b0000001: //0
+							(scoreFirst[3:0] == 4'b0001) ? 7'b1001111: //1
+							(scoreFirst[3:0] == 4'b0010) ? 7'b0010010: //2
+							(scoreFirst[3:0] == 4'b0011) ? 7'b0000110: //3
+							(scoreFirst[3:0] == 4'b0100) ? 7'b1001100: //4
+							(scoreFirst[3:0] == 4'b0101) ? 7'b0100100: //5
+							(scoreFirst[3:0] == 4'b0110) ? 7'b0100000: //6
+							(scoreFirst[3:0] == 4'b0111) ? 7'b0001111: //7
+							(scoreFirst[3:0] == 4'b1000) ? 7'b0000000: 7'b0000100; //8 else 9
+		 hex1_d = (scoreSecond[3:0] == 4'b0000) ? 7'b0000001: //0
+							(scoreSecond[3:0] == 4'b0001) ? 7'b1001111: //1
+							(scoreSecond[3:0] == 4'b0010) ? 7'b0010010: //2
+							(scoreSecond[3:0] == 4'b0011) ? 7'b0000110: //3
+							(scoreSecond[3:0] == 4'b0100) ? 7'b1001100: //4
+							(scoreSecond[3:0] == 4'b0101) ? 7'b0100100: //5
+							(scoreSecond[3:0] == 4'b0110) ? 7'b0100000: //6
+							(scoreSecond[3:0] == 4'b0111) ? 7'b0001111: //7
+							(scoreSecond[3:0] == 4'b1000) ? 7'b0000000: 7'b0000100; //8 else 9
+		 hex2_d  = (timeFirst[3:0] == 4'b0000) ? 7'b0000001: //0
+							(timeFirst[3:0] == 4'b0001) ? 7'b1001111: //1
+							(timeFirst[3:0] == 4'b0010) ? 7'b0010010: //2
+							(timeFirst[3:0] == 4'b0011) ? 7'b0000110: //3
+							(timeFirst[3:0] == 4'b0100) ? 7'b1001100: //4
+							(timeFirst[3:0] == 4'b0101) ? 7'b0100100: //5
+							(timeFirst[3:0] == 4'b0110) ? 7'b0100000: //6
+							(timeFirst[3:0] == 4'b0111) ? 7'b0001111: //7
+							(timeFirst[3:0] == 4'b1000) ? 7'b0000000: 7'b0000100; //8 else 9
+		 hex3_d = (timeSecond[3:0] == 4'b0000) ? 7'b0000001: //0
+							(timeSecond[3:0] == 4'b0001) ? 7'b1001111: //1
+							(timeSecond[3:0] == 4'b0010) ? 7'b0010010: //2
+							(timeSecond[3:0] == 4'b0011) ? 7'b0000110: //3
+							(timeSecond[3:0] == 4'b0100) ? 7'b1001100: //4
+							(timeSecond[3:0] == 4'b0101) ? 7'b0100100: //5
+							(timeSecond[3:0] == 4'b0110) ? 7'b0100000: //6
+							(timeSecond[3:0] == 4'b0111) ? 7'b0001111: //7
+							(timeSecond[3:0] == 4'b1000) ? 7'b0000000: 7'b0000100; //8 else 9
+				 
+		if(gamelock == 0) begin
+			if(!BT[1]) begin
+				gamelock = 1;
+				
+			end
+		end	
+					   
+		if(gamelock == 2) begin			// lose
+			vga_r <= (X >= 226 && X <= 235 && Y >= 101 && Y <= 150) ? 1023:
+					 (X >= 226 && X <= 275 && Y >= 141 && Y <= 150) ? 1023:
+					 
+					 (X >= 286 && X <= 335 && Y >= 101 && Y <= 110) ? 1023:
+					 (X >= 286 && X <= 335 && Y >= 141 && Y <= 150) ? 1023:
+					 (X >= 286 && X <= 295 && Y >= 101 && Y <= 150) ? 1023:
+					 (X >= 326 && X <= 335 && Y >= 101 && Y <= 150) ? 1023:
+						 
+					 (X >= 346 && X <= 395 && Y >= 101 && Y <= 110) ? 1023:
+					 (X >= 346 && X <= 395 && Y >= 121 && Y <= 130) ? 1023:
+					 (X >= 346 && X <= 395 && Y >= 141 && Y <= 150) ? 1023:
+					 (X >= 346 && X <= 355 && Y >= 111 && Y <= 120) ? 1023:
+					 (X >= 386 && X <= 395 && Y >= 131 && Y <= 140) ? 1023:
+						 
+					 (X >= 406 && X <= 455 && Y >= 101 && Y <= 110) ? 1023:
+					 (X >= 406 && X <= 455 && Y >= 121 && Y <= 130) ? 1023:
+					 (X >= 406 && X <= 455 && Y >= 141 && Y <= 150) ? 1023:
+					 (X >= 406 && X <= 415 && Y >= 101 && Y <= 150) ? 1023:
+				     128;
+			vga_g<=128;
+			vga_b <= (X >= 226 && X <= 235 && Y >= 101 && Y <= 150) ? 1023:
+					 (X >= 226 && X <= 275 && Y >= 141 && Y <= 150) ? 1023:
+					 
+					 (X >= 286 && X <= 335 && Y >= 101 && Y <= 110) ? 1023:
+					 (X >= 286 && X <= 335 && Y >= 141 && Y <= 150) ? 1023:
+					 (X >= 286 && X <= 295 && Y >= 101 && Y <= 150) ? 1023:
+					 (X >= 326 && X <= 335 && Y >= 101 && Y <= 150) ? 1023:
+						 
+					 (X >= 346 && X <= 395 && Y >= 101 && Y <= 110) ? 1023:
+					 (X >= 346 && X <= 395 && Y >= 121 && Y <= 130) ? 1023:
+					 (X >= 346 && X <= 395 && Y >= 141 && Y <= 150) ? 1023:
+					 (X >= 346 && X <= 355 && Y >= 111 && Y <= 120) ? 1023:
+					 (X >= 386 && X <= 395 && Y >= 131 && Y <= 140) ? 1023:
+						 
+					 (X >= 406 && X <= 455 && Y >= 101 && Y <= 110) ? 1023:
+					 (X >= 406 && X <= 455 && Y >= 121 && Y <= 130) ? 1023:
+					 (X >= 406 && X <= 455 && Y >= 141 && Y <= 150) ? 1023:
+					 (X >= 406 && X <= 415 && Y >= 101 && Y <= 150) ? 1023:
+				     128;
+				
+			if(!BT[1]) begin
+				gamelock = 0;
+				dir = 3;
+				headx = 340;
+				heady = 240;
+				apple1x = 300;
+				apple1y = 120;
+				clock = 0;
+				s0  = 3750000;
+				vga_r <= 0;
+				vga_g <= 0;
+				vga_b <= 0;
+				scoreFirst <= 0; 
+				scoreSecond <= 0;
+				timeFirst <= 0; 
+				timeSecond <= 0;
+				Count<=0;
+				
+				//
+				for(i=1;i<=9;i=i+1) begin
+					body_x[i]=0;
+					body_y[i]=0;
+					state[i]=1; 
+				end
+				b=1;
+				//
+			end
+		end
+		
+		if (gamelock == 3)begin		//END
+			vga_r <= (X >= 256 && X <= 305 && Y >= 101 && Y <= 110) ? 1023:
+					 (X >= 256 && X <= 305 && Y >= 121 && Y <= 130) ? 1023:
+					 (X >= 256 && X <= 305 && Y >= 141 && Y <= 150) ? 1023:
+					 (X >= 256 && X <= 265 && Y >= 101 && Y <= 150) ? 1023:
+						 
+					 (X >= 316 && X <= 325 && Y >= 101 && Y <= 150) ? 1023:
+					 (X >= 356 && X <= 365 && Y >= 101 && Y <= 150) ? 1023:
+					 (X >= 326 && X <= 335 && Y >= 101 && Y <= 120) ? 1023:
+					 (X >= 346 && X <= 355 && Y >= 131 && Y <= 150) ? 1023:
+					 (X >= 336 && X <= 345 && Y >= 121 && Y <= 130) ? 1023:
+						 
+					 (X >= 376 && X <= 385 && Y >= 101 && Y <= 150) ? 1023:
+					 (X >= 386 && X <= 405 && Y >= 101 && Y <= 110) ? 1023:
+					 (X >= 386 && X <= 405 && Y >= 141 && Y <= 150) ? 1023:
+					 (X >= 406 && X <= 415 && Y >= 111 && Y <= 120) ? 1023:
+					 (X >= 416 && X <= 425 && Y >= 121 && Y <= 130) ? 1023:
+					 (X >= 406 && X <= 415 && Y >= 131 && Y <= 140) ? 1023:
+					 128;
+			vga_g<=128;
+			vga_b <= (X >= 256 && X <= 305 && Y >= 101 && Y <= 110) ? 1023:
+					 (X >= 256 && X <= 305 && Y >= 121 && Y <= 130) ? 1023:
+					 (X >= 256 && X <= 305 && Y >= 141 && Y <= 150) ? 1023:
+					 (X >= 256 && X <= 265 && Y >= 101 && Y <= 150) ? 1023:
+						 
+					 (X >= 316 && X <= 325 && Y >= 101 && Y <= 150) ? 1023:
+					 (X >= 356 && X <= 365 && Y >= 101 && Y <= 150) ? 1023:
+					 (X >= 326 && X <= 335 && Y >= 101 && Y <= 120) ? 1023:
+					 (X >= 346 && X <= 355 && Y >= 131 && Y <= 150) ? 1023:
+					 (X >= 336 && X <= 345 && Y >= 121 && Y <= 130) ? 1023:
+						 
+					 (X >= 376 && X <= 385 && Y >= 101 && Y <= 150) ? 1023:
+					 (X >= 386 && X <= 405 && Y >= 101 && Y <= 110) ? 1023:
+					 (X >= 386 && X <= 405 && Y >= 141 && Y <= 150) ? 1023:
+					 (X >= 406 && X <= 415 && Y >= 111 && Y <= 120) ? 1023:
+					 (X >= 416 && X <= 425 && Y >= 121 && Y <= 130) ? 1023:
+					 (X >= 406 && X <= 415 && Y >= 131 && Y <= 140) ? 1023:
+					 128;
+					
+			if(!BT[1]) begin
+				gamelock = 0;
+				dir = 3;
+				headx = 340;
+				heady = 240;
+				apple1x = 300;
+				apple1y = 120;
+				clock = 0;
+				s0  = 3750000;
+				vga_r <= 0;
+				vga_g <= 0;
+				vga_b <= 0;
+				scoreFirst <= 0; 
+				scoreSecond <= 0;
+				timeFirst <= 0; 
+				timeSecond <= 0;
+				Count<=0;
+				//
+				for(i=1;i<=9;i=i+1) begin
+					body_x[i]=0;
+					body_y[i]=0;
+					state[i]=1; 
+				end
+				b=1;
+				//
+			end	
+		end	
+	end		
+ end
+
+endmodule

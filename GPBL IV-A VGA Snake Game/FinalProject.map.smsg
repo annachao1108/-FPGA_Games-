@@ -1,0 +1,14 @@
+Warning (10268): Verilog HDL information at FinalProject.v(239): always construct contains both blocking and non-blocking assignments
+Info (10281): Verilog HDL Declaration information at FinalProject.v(69): object "VGA_R" differs only in case from object "vga_r" in the same scope
+Info (10281): Verilog HDL Declaration information at FinalProject.v(70): object "VGA_G" differs only in case from object "vga_g" in the same scope
+Info (10281): Verilog HDL Declaration information at FinalProject.v(71): object "VGA_B" differs only in case from object "vga_b" in the same scope
+Info (10281): Verilog HDL Declaration information at FinalProject.v(67): object "VGA_HS" differs only in case from object "vga_hs" in the same scope
+Info (10281): Verilog HDL Declaration information at FinalProject.v(68): object "VGA_VS" differs only in case from object "vga_vs" in the same scope
+Info (10281): Verilog HDL Declaration information at FinalProject.v(10): object "HEX0_D" differs only in case from object "hex0_d" in the same scope
+Info (10281): Verilog HDL Declaration information at FinalProject.v(12): object "HEX1_D" differs only in case from object "hex1_d" in the same scope
+Info (10281): Verilog HDL Declaration information at FinalProject.v(14): object "HEX2_D" differs only in case from object "hex2_d" in the same scope
+Info (10281): Verilog HDL Declaration information at FinalProject.v(16): object "HEX3_D" differs only in case from object "hex3_d" in the same scope
+Info (10281): Verilog HDL Declaration information at FinalProject.v(119): object "X" differs only in case from object "x" in the same scope
+Info (10281): Verilog HDL Declaration information at FinalProject.v(120): object "Y" differs only in case from object "y" in the same scope
+Warning (10268): Verilog HDL information at divn.v(27): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at divn.v(45): always construct contains both blocking and non-blocking assignments
