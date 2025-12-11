@@ -1,1 +1,1 @@
-![image](https://github.com/yobattle18/FPGApic/blob/f7d28346899540baa314d13ec38c39533c5e5ea9/dino.png)
+![image]([https://github.com/yobattle18/FPGApic/blob/f7d28346899540baa314d13ec38c39533c5e5ea9/dino.png](https://github.com/yobattle18/FPGApic/blob/3dcf84fe1c9ab1870453b33d36587bdb8a771eec/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202025-12-11%20094904.png))
